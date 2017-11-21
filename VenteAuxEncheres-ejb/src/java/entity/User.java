@@ -6,10 +6,12 @@
 package entity;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -22,13 +24,62 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @NotNull
+    @Column(name = "login")
+    private String login;
+    @NotNull
+    @Column(name = "mdp")
+    private String mdp;
+    @NotNull
+    @Column(name = "nom")
+    private String nom;
+    @NotNull
+    @Column(name = "prenom")
+    private String prenom;
+    
+    @Column(name = "adresse")
+    private String adresse;
+    @Column(name = "numero_compte_bancaire")
+    private String numeroCompteBancaire;
+    
+    public User(String login, String mdp, String nom, String prenom) {
+        this.login = login;
+        this.mdp = mdp;
+        this.nom = nom;
+        this.prenom = prenom;
+    }
+    
+    public User(String login, String mdp, String nom, String prenom, String adresse, String ncb) {
+        this.login = login;
+        this.mdp = mdp;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.numeroCompteBancaire = ncb;
+    }
+    
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getMdp() {
+        return mdp;
+    }
+
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
     }
 
     @Override
@@ -53,7 +104,14 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.User[ id=" + id + " ]";
+        return "entity.User[ "
+                + "\n\tid=" + id 
+                + "\n\tlogin=" + login
+                + "\n\tnom=" + nom
+                + "\n\tprenom=" + prenom
+                + "\n\tadresse=" + adresse
+                + "\n\tnumero_compte_bancaire=" + numeroCompteBancaire
+                + "\n]";
     }
     
 }
