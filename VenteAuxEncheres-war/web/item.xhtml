@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+        <meta name="description" content=""></meta>
+        <meta name="author" content=""></meta>
+        
+        <title>Modern Business - Start Bootstrap Template</title>
+        
+        <!-- Bootstrap core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+        
+        <!-- Custom styles for this template -->
+        <link href="css/modern-business.css" rel="stylesheet"></link>
+        
+    </h:head>
+    
+    <h:body>
+        
+        <!-- Navigation -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="">Ventes aux enchères</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        
+                        <ui:repeat var="elem" value="#{navigationManagedBean.listMenu}">
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="">#{elem}</a>
+                            </li>
+                            
+                        </ui:repeat>
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        
+        
+        <!-- Page Content -->
+        <div class="container">
+            
+            <!-- Page Heading/Breadcrumbs -->
+            <h1 class="mt-4 mb-3">Portfolio Item
+                <small>Subheading</small>
+            </h1>
+            
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="breadcrumb-item active">Portfolio Item</li>
+            </ol>
+            
+            <!-- Portfolio Item Row -->
+            <div class="row">
+                
+                <div class="col-md-8">
+                    <img class="img-fluid" src="http://placehold.it/750x500" alt=""></img>
+                </div>
+                
+                <div class="col-md-4">
+                    <h3 class="my-3">Project Description</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+                    <h3 class="my-3">Project Details</h3>
+                    <ul>
+                        <li>Lorem Ipsum</li>
+                        <li>Dolor Sit Amet</li>
+                        <li>Consectetur</li>
+                        <li>Adipiscing Elit</li>
+                    </ul>
+                </div>
+                
+            </div>
+            <br></br>
+            <!-- /.row -->
+            
+        </div>
+        <!-- /.container -->
+        
+        
+        
+        <!-- Footer -->
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+            </div>
+        </footer>
+        <!-- /.container -->
+        
+        <!-- Bootstrap core JavaScript -->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- /.container -->
+        
+    </h:body>
+</html>
+
