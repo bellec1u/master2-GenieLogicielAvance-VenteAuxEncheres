@@ -5,57 +5,69 @@
  */
 package entity;
 
+import java.util.List;
 import java.io.Serializable;
+import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Leopold
  */
 @Entity
+@Table(name="Users")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull
     @Column(name = "login")
     private String login;
-    @NotNull
-    @Column(name = "mdp")
-    private String mdp;
-    @NotNull
-    @Column(name = "nom")
-    private String nom;
-    @NotNull
-    @Column(name = "prenom")
-    private String prenom;
+    @Column(name = "password")
+    private String password;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "first_name")
+    private String firstName;
     
-    @Column(name = "adresse")
-    private String adresse;
-    @Column(name = "numero_compte_bancaire")
-    private String numeroCompteBancaire;
+    @Column(name = "address")
+    private String address;
+    @Column(name = "banl_account_number")
+    private String bankAccountNumber;
     
-    public User(String login, String mdp, String nom, String prenom) {
-        this.login = login;
-        this.mdp = mdp;
-        this.nom = nom;
-        this.prenom = prenom;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Item> items;
+    
+    public User() {
+        
     }
     
-    public User(String login, String mdp, String nom, String prenom, String adresse, String ncb) {
+    public User(String login, String password, String lastName, String firstName) {
         this.login = login;
-        this.mdp = mdp;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.adresse = adresse;
-        this.numeroCompteBancaire = ncb;
+        this.password = password;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        
+        this.items = new ArrayList();
+    }
+    
+    public User(String login, String password, String lastName, String firstName, String address, String ban) {
+        this.login = login;
+        this.password = password;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.address = address;
+        this.bankAccountNumber = ban;
+        
+        this.items = new ArrayList();
     }
     
     public Long getId() {
@@ -74,12 +86,52 @@ public class User implements Serializable {
         this.login = login;
     }
 
-    public String getMdp() {
-        return mdp;
+    public String getPassword() {
+        return password;
     }
 
-    public void setMdp(String mdp) {
-        this.mdp = mdp;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getBankAccountNumber() {
+        return bankAccountNumber;
+    }
+
+    public void setBankAccountNumber(String bankAccountNumber) {
+        this.bankAccountNumber = bankAccountNumber;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     @Override
@@ -105,12 +157,12 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "entity.User[ "
-                + "\n\tid=" + id 
-                + "\n\tlogin=" + login
-                + "\n\tnom=" + nom
-                + "\n\tprenom=" + prenom
-                + "\n\tadresse=" + adresse
-                + "\n\tnumero_compte_bancaire=" + numeroCompteBancaire
+                + "\n\tid=" + id + ","
+                + "\n\tlogin=" + login + ","
+                + "\n\tlast_name=" + lastName + ","
+                + "\n\tfirst_name=" + firstName + ","
+                + "\n\taddress=" + address + ","
+                + "\n\tbank_account_number=" + bankAccountNumber
                 + "\n]";
     }
     
