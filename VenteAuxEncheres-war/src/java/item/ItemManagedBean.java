@@ -5,7 +5,9 @@
 */
 package item;
 
+import dao.ItemManagerBean;
 import dao.UserManagerBean;
+import entity.Item;
 import entity.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,31 +25,31 @@ public class ItemManagedBean {
     
     @EJB
     private UserManagerBean umb;
-    
-    private List<String> listItems;
-    
+    @EJB
+    private ItemManagerBean imb;
+        
     /**
      * Creates a new instance of ItemManagedBean
      */
     public ItemManagedBean() {
-        this.listItems = new ArrayList();
-        for (int i = 0; i < 7; i++) {
-            this.listItems.add( "item " + i );
-        }
+        
     }
     
-    public void addUser() {
-        System.out.println("AAAAAAAAA");
+    // p-e a bouger
+    public void initBDD() {
         User u = new User("login", "password", "lastName", "firstName");
-        umb.addUser(u);
+      
+        Item i = new Item("nom", "description", 18);
+        Item i2 = new Item("nom2", "description2", 19);
+        
+        u.addItem(i);
+        u.addItem(i2);
+
+        umb.add(u);
     }
     
-    public List<String> getListItems() {
-        return listItems;
-    }
-    
-    public void setListItems(List<String> listItems) {
-        this.listItems = listItems;
+    public List<Item> getAllItems() {
+        return imb.getAll();
     }
     
 }

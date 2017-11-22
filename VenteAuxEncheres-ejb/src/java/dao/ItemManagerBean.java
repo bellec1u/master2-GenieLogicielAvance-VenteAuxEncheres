@@ -5,23 +5,28 @@
  */
 package dao;
 
-import entity.User;
+import entity.Item;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
  * @author Leopold
  */
 @Stateless
-public class UserManagerBean {
-    
+public class ItemManagerBean {
+
     @PersistenceContext(unitName = "VenteAuxEncheres-ejbPU")
     private EntityManager em;
     
-    public void add(User u) {
-        em.persist(u);
+    public List<Item> getAll() {
+        TypedQuery<Item> query = em.createNamedQuery("Item.findAll", Item.class);
+        List<Item> items = query.getResultList();
+        return (items == null ? new ArrayList() : items);
     }
     
 }

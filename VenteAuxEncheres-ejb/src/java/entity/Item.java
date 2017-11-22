@@ -15,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,6 +26,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="Items")
+@NamedQueries({
+    @NamedQuery(name = "Item.findAll", 
+            query = "select i from Item i")
+})
 public class Item implements Serializable {
 
     private static final long serialVersionUID = 1L;
