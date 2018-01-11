@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name="Articles")
 @NamedQueries({
     @NamedQuery(name = "Article.findAll", 
-            query = "select i from Article i")
+            query = "select a from Article a")
 })
 public class Article implements Serializable {
 
@@ -134,6 +134,13 @@ public class Article implements Serializable {
     public void addBidding(Bidding bidding) {
         bidding.setArticle(this);
         biddings.add(bidding);
+    }
+    
+    public boolean hasEnded() {
+        if (endDate.compareTo(new Date()) > 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
