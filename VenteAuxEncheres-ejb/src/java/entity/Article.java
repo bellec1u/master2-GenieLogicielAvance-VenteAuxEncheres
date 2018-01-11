@@ -8,67 +8,65 @@ package entity;
 import java.util.List;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Leopold
  */
 @Entity
-@Table(name="Items")
+@Table(name="Articles")
 @NamedQueries({
-    @NamedQuery(name = "Item.findAll", 
-            query = "select i from Item i")
+    @NamedQuery(name = "Article.findAll", 
+            query = "select i from Article i")
 })
-public class Item implements Serializable {
+public class Article implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "name")
+    @NotNull
     private String name;
-    @Column(name = "description")
+    @NotNull
     private String description;
-    @Column(name = "starting_price")
+    @NotNull
     private double startingPrice;
-    @ManyToOne
-    private User user;
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
-    private List<Categorie> categories;
-    @Column(name = "duree_de_vente")
-    private int dureeDeVente;
+    @NotNull
+    private Date endDate;
 
-    public Item() {
+    private double bonus;
+    
+    @NotNull
+    private String categories;
+    
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    private List<Bidding> biddings;
+
+    public Article() {
         
     }
     
-    public Item(String name, String description, int startingPrice) {
+    public Article(String name, String description, double startingPrice, Date endDate, String categories) {
         this.name = name;
         this.description = description;
         this.startingPrice = startingPrice;
-        
-        this.categories = new ArrayList();
+        this.endDate = endDate;
+        this.bonus = 0;
+        this.categories = categories;
     }
-    
-    public void addCategorie(Categorie c) {
-        this.categories.add(c);
-    }
-    
-    public void delCategorie() {
-        System.err.println("----- ----- Item.delCategorie()");
-    }
-    
+
     public Long getId() {
         return id;
     }
@@ -101,12 +99,41 @@ public class Item implements Serializable {
         this.startingPrice = startingPrice;
     }
 
-    public List<Categorie> getCategories() {
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public double getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(double bonus) {
+        this.bonus = bonus;
+    }
+
+    public String getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Categorie> categories) {
+    public void setCategories(String categories) {
         this.categories = categories;
+    }
+
+    public List<Bidding> getBiddings() {
+        return biddings;
+    }
+
+    public void setBiddings(List<Bidding> biddings) {
+        this.biddings = biddings;
+    }
+    
+    public void addBidding(Bidding bidding) {
+        bidding.setArticle(this);
+        biddings.add(bidding);
     }
 
     @Override
@@ -119,10 +146,10 @@ public class Item implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Item)) {
+        if (!(object instanceof Article)) {
             return false;
         }
-        Item other = (Item) object;
+        Article other = (Article) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -131,13 +158,7 @@ public class Item implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Item[ "
-                + "\n\tid=" + id + ","
-                + "\n\tnom=" + name + ","
-                + "\n\tdescription=" + description + ","
-                + "\n\tprixDeDepart=" + startingPrice + ","
-                + "\n\tcategories=" + categories
-                + "\n]";
+        return "Article{" + "id=" + id + ", name=" + name + ", description=" + description + ", startingPrice=" + startingPrice + ", endDate=" + endDate + ", bonus=" + bonus + ", categories=" + categories + '}';
     }
     
 }

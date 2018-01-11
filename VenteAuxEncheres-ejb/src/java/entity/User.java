@@ -9,7 +9,6 @@ import java.util.List;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -27,9 +27,7 @@ import javax.persistence.Table;
 @Table(name="Users")
 @NamedQueries({
     @NamedQuery(name = "User.findAll", 
-            query = "select u from User u"),
-    @NamedQuery(name = "User.findAllItemsById", 
-            query = "select i from Item i where i.user = ?1")
+            query = "select u from User u")
 })
 public class User implements Serializable {
 
@@ -37,51 +35,48 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "login")
+    @NotNull
     private String login;
-    @Column(name = "password")
+    @NotNull
     private String password;
-    @Column(name = "last_name")
+    @NotNull
     private String lastName;
-    @Column(name = "first_name")
+    @NotNull
     private String firstName;
-    
-    @Column(name = "address")
+    @NotNull
     private String address;
-    @Column(name = "banl_account_number")
-    private String bankAccountNumber;
+    @NotNull
+    private int nbAbandonedBiddings;
+    @NotNull
+    private double wallet;
     
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Item> items;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Purchase> purchases;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Article> articles;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Bidding> biddings;
     
     public User() {
         
     }
     
-    public User(String login, String password, String lastName, String firstName) {
-        this.login = login;
-        this.password = password;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        
-        this.items = new ArrayList();
-    }
-    
-    public User(String login, String password, String lastName, String firstName, String address, String ban) {
+    public User(String login, String password, String lastName, String firstName, String address) {
         this.login = login;
         this.password = password;
         this.lastName = lastName;
         this.firstName = firstName;
         this.address = address;
-        this.bankAccountNumber = ban;
+        this.nbAbandonedBiddings = 0;
+        this.wallet = 0;
         
-        this.items = new ArrayList();
+        this.purchases = new ArrayList<>();
+        this.articles = new ArrayList<>();
+        this.biddings = new ArrayList<>();
     }
-    
-    public void addItem(Item i) {
-        items.add(i);
-    }
-    
+
     public Long getId() {
         return id;
     }
@@ -130,20 +125,56 @@ public class User implements Serializable {
         this.address = address;
     }
 
-    public String getBankAccountNumber() {
-        return bankAccountNumber;
+    public int getNbAbandonedBiddings() {
+        return nbAbandonedBiddings;
     }
 
-    public void setBankAccountNumber(String bankAccountNumber) {
-        this.bankAccountNumber = bankAccountNumber;
+    public void setNbAbandonedBiddings(int nbAbandonedBiddings) {
+        this.nbAbandonedBiddings = nbAbandonedBiddings;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public double getWallet() {
+        return wallet;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setWallet(double wallet) {
+        this.wallet = wallet;
+    }
+
+    public List<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(List<Purchase> purchases) {
+        this.purchases = purchases;
+    }
+    
+    public void addPurchase(Purchase purchase) {
+        purchases.add(purchase);
+    }
+
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
+    
+    public void addArticle(Article article) {
+        articles.add(article);
+    }
+
+    public List<Bidding> getBiddings() {
+        return biddings;
+    }
+
+    public void setBiddings(List<Bidding> biddings) {
+        this.biddings = biddings;
+    }
+    
+    public void addBidding(Bidding bidding) {
+        biddings.add(bidding);
     }
 
     @Override
@@ -168,14 +199,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.User[ "
-                + "\n\tid=" + id + ","
-                + "\n\tlogin=" + login + ","
-                + "\n\tlast_name=" + lastName + ","
-                + "\n\tfirst_name=" + firstName + ","
-                + "\n\taddress=" + address + ","
-                + "\n\tbank_account_number=" + bankAccountNumber
-                + "\n]";
+        return "User{" + "id=" + id + ", login=" + login + ", password=" + password + ", lastName=" + lastName + ", firstName=" + firstName + ", address=" + address + ", nbAbandonedBiddings=" + nbAbandonedBiddings + ", wallet=" + wallet + '}';
     }
     
 }

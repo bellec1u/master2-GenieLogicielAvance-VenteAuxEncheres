@@ -6,30 +6,39 @@
 package entity;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Leopold
  */
 @Entity
-@Table(name="Categories")
-public class Categorie implements Serializable {
+@Table(name="Biddings")
+public class Bidding implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
+    private double amount;
+    
     @ManyToOne
-    private Item item;
+    private Article article;
 
-    public Categorie() {
+    public Bidding() {
         
+    }
+    
+    public Bidding(double amount) {
+        this.amount = amount;
     }
     
     public Long getId() {
@@ -38,6 +47,22 @@ public class Categorie implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
     }
 
     @Override
@@ -50,10 +75,10 @@ public class Categorie implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Categorie)) {
+        if (!(object instanceof Bidding)) {
             return false;
         }
-        Categorie other = (Categorie) object;
+        Bidding other = (Bidding) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -62,9 +87,7 @@ public class Categorie implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Categorie[ "
-                + "\n\tid=" + id 
-                + "\n]";
+        return "Bidding{" + "id=" + id + ", amount=" + amount + '}';
     }
     
 }
