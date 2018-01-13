@@ -29,7 +29,9 @@ import javax.validation.constraints.NotNull;
 @Table(name="Articles")
 @NamedQueries({
     @NamedQuery(name = "Article.findAll", 
-            query = "select a from Article a")
+            query = "select a from Article a"),
+    @NamedQuery(name = "Article.findByName",
+            query = "select a from Article a where a.name = :name")
 })
 public class Article implements Serializable {
 
@@ -65,6 +67,8 @@ public class Article implements Serializable {
         this.endDate = endDate;
         this.bonus = 0;
         this.categories = categories;
+        
+        this.biddings = new ArrayList<>();
     }
 
     public Long getId() {
