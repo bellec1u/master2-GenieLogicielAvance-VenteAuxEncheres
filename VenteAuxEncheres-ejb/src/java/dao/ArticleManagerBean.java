@@ -6,6 +6,7 @@
 package dao;
 
 import entity.Article;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
@@ -38,6 +39,35 @@ public class ArticleManagerBean extends AbstractManager<Article> {
         }
         
         return article;
+    }
+    
+    public List<Article> getAll() {
+        return executeNamedQuery("Article.findAll");
+    }
+
+    public List<Article> findByName(String name) {
+        System.out.println("dao.ArticleManagerBean.findByName()");
+        return getEntityManager()
+                .createNamedQuery("Article.findByName", Article.class)
+                .setParameter("name", "%" + name + "%")
+                .getResultList();
+    }
+    
+    public List<Article> findByCategories(String categories) {
+        System.out.println("dao.ArticleManagerBean.findByCategories()");
+        return getEntityManager()
+                .createNamedQuery("Article.findByCategories", Article.class)
+                .setParameter("categories", "%" + categories + "%")
+                .getResultList();
+    }
+    
+    public List<Article> findByNameAndCategories(String name, String categories) {
+        System.out.println("dao.ArticleManagerBean.findByNameAndCategories()");
+        return getEntityManager()
+                .createNamedQuery("Article.findByCategories", Article.class)
+                .setParameter("name", "%" + name + "%")
+                .setParameter("categories", "%" + categories + "%")
+                .getResultList();
     }
 
 }

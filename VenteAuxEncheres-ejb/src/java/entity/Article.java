@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +30,11 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "Article.findAll", 
             query = "select a from Article a"),
     @NamedQuery(name = "Article.findByName",
-            query = "select a from Article a where a.name = :name")
+            query = "select a from Article a where upper(a.name) like upper(:name)"),
+    @NamedQuery(name = "Article.findByCategories",
+            query = "select a from Article a where upper(a.categories) like upper(:categories)"),
+    @NamedQuery(name = "Article.findByNameAndCategories",
+            query = "select a from Article a where upper(a.name) like upper(:name) and upper(a.categories) like upper(:categories)")
 })
 public class Article implements Serializable {
 

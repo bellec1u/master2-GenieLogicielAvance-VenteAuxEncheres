@@ -6,6 +6,8 @@
 package article;
 
 import dao.ArticleManagerBean;
+import entity.Article;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -33,6 +35,10 @@ public class ArticleBean {
         articleManager.removeById(articleId);
         
         return "";
+    }
+    
+    public List<Article> getAllArticles() {
+        return articleManager.getAll();
     }
     
 }
