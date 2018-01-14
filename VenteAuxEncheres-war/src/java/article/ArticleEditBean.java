@@ -7,6 +7,7 @@ package article;
 
 import dao.ArticleManagerBean;
 import entity.Article;
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -30,6 +31,7 @@ public class ArticleEditBean {
      */
     public ArticleEditBean() {
         this.article = new Article();
+        this.article.setEndDate(new Date());
     }
 
     public Long getId() {
@@ -54,14 +56,12 @@ public class ArticleEditBean {
         return "";
     }
     
-    public String edit() {
-        articleManager.edit(article);
-        
-        return "";
+    public void create() {
+        articleManager.create(article);
     }
     
-    public String create() {
-        articleManager.create(article);
+    public String edit() {
+        articleManager.edit(article);
         
         return "";
     }
