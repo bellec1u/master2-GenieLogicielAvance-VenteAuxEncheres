@@ -34,7 +34,9 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "Article.findByCategories",
             query = "select a from Article a where upper(a.categories) like upper(:categories)"),
     @NamedQuery(name = "Article.findByNameAndCategories",
-            query = "select a from Article a where upper(a.name) like upper(:name) and upper(a.categories) like upper(:categories)")
+            query = "select a from Article a where upper(a.name) like upper(:name) and upper(a.categories) like upper(:categories)"),
+    @NamedQuery(name = "Article.findByBonus",
+            query = "select a from Article a where a.bonus > 0.0")
 })
 public class Article implements Serializable {
 
