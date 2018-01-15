@@ -6,12 +6,13 @@
 package entity;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -21,6 +22,10 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name="Biddings")
+@NamedQueries({
+    @NamedQuery(name = "Bidding.findHighestBidding", 
+            query = "select b from Bidding b where b.amount = (select max(b2.amount) from Bidding b2 where b2.article.id = :id)")
+})
 public class Bidding implements Serializable {
 
     private static final long serialVersionUID = 1L;

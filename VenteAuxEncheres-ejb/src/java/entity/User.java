@@ -27,7 +27,9 @@ import javax.validation.constraints.NotNull;
 @Table(name="Users")
 @NamedQueries({
     @NamedQuery(name = "User.findAll", 
-            query = "select u from User u")
+            query = "select u from User u"),
+    @NamedQuery(name = "User.findById", 
+            query = "select u from User u where u.id = :id")
 })
 public class User implements Serializable {
 
@@ -155,6 +157,15 @@ public class User implements Serializable {
 
     public List<Article> getArticles() {
         return articles;
+    }
+
+    public Article getArticleById(Long id) {
+        for (Article a : articles) {
+            if (a.getId() == id) {
+                return a;
+            }
+        }
+        return null;
     }
 
     public void setArticles(List<Article> articles) {

@@ -11,20 +11,24 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedProperty;
 
 /**
  *
  * @author Leopold
  */
-@Named(value = "articleManagedBean")
+@Named(value = "articleBean")
 @RequestScoped
 public class ArticleBean {
 
     @EJB
     private ArticleManagerBean articleManager;
     
+    @ManagedProperty(value = "#{param.userID}")
     private Long articleId;
     
+    private Article article;
+        
     /**
      * Creates a new instance of ArticleManagedBean
      */
@@ -36,9 +40,29 @@ public class ArticleBean {
         
         return "";
     }
+
+    public void findArticle() {
+        article = articleManager.getById(articleId);
+    }
     
     public List<Article> getAllArticles() {
         return articleManager.getAll();
+    }
+
+    public Long getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(Long articleId) {
+        this.articleId = articleId;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
     }
     
 }

@@ -5,6 +5,7 @@
  */
 package dao;
 
+import entity.Bidding;
 import entity.User;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -15,13 +16,24 @@ import javax.persistence.PersistenceContext;
  * @author Leopold
  */
 @Stateless
-public class UserManagerBean {
+public class UserManagerBean extends AbstractManager<User> {
     
     @PersistenceContext(unitName = "VenteAuxEncheres-ejbPU")
     private EntityManager em;
     
-    public void add(User u) {
-        em.persist(u);
+    public UserManagerBean() {
+        super(User.class);
+    }
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
+    public void addBidding(Bidding bid, Long userID) {
+        User user = getById(userID);
+        user.addBidding(bid);
+        edit(user);
     }
     
 }

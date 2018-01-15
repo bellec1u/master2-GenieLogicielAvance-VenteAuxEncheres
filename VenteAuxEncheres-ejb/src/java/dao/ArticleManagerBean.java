@@ -6,6 +6,7 @@
 package dao;
 
 import entity.Article;
+import entity.Bidding;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
@@ -68,6 +69,12 @@ public class ArticleManagerBean extends AbstractManager<Article> {
                 .setParameter("name", "%" + name + "%")
                 .setParameter("categories", "%" + categories + "%")
                 .getResultList();
+    }
+
+    public void addBidding(Bidding bid, Long articleID) {
+        Article article = getById(articleID);
+        article.addBidding(bid);
+        edit(article);
     }
 
 }
