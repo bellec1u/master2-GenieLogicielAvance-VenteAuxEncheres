@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
 
         <meta charset="utf-8"></meta>
@@ -36,11 +37,16 @@
                         <ui:repeat var="elem" value="#{navigationManagedBean.listMenu}">
 
                             <li class="nav-item">
-                                <a class="nav-link" href="">#{elem}</a>
+                                <a class="nav-link" href="#{elem.link}">#{elem.displayName}</a>
                             </li>
 
                         </ui:repeat>
 
+                        <c:if test="#{not empty navigationManagedBean.currentLogin}">
+                            <li class="nav-item">
+                                <span class="navbar-brand">Bonjour, #{navigationManagedBean.currentLogin} !</span>
+                            </li>
+                        </c:if>
                     </ul>
                 </div>
             </div>

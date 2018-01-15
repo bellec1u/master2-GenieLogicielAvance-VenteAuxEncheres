@@ -20,11 +20,6 @@
         <!-- Custom styles for this template -->
         <link href="css/modern-business.css" rel="stylesheet"></link>
 
-        <f:metadata>
-            <f:viewParam name="articleID" value="#{articleBean.articleId}" />
-            <f:viewAction action="#{articleBean.findArticle()}" />
-        </f:metadata>
-
     </h:head>
 
     <h:body>
@@ -62,50 +57,24 @@
         <!-- Page Content -->
         <div class="container">
             <!-- Page Heading/Breadcrumbs -->
-            <h1 class="mt-4 mb-3">Article : 
-                <small>#{articleBean.article.name}</small>
+            <h1 class="mt-4 mb-3" align="center">
+                Connectez-vous
             </h1>
+            
+            <div>
+                <h:form id="loginForm" >
+                    <h:outputLabel>Login : </h:outputLabel>
+                    <h:inputText id="login" class="form-control" value="#{userBean.login}" />
+                    <br/>
+                    <h:outputLabel>Mot de Passe : </h:outputLabel>
+                    <h:inputSecret id="password" class="form-control" value="#{userBean.password}" />
+                    <br/>
 
-            <!-- Portfolio Item Row -->
-            <div class="row">
-
-                <div class="col-md-8">
-                    <img class="img-fluid" src="http://pokemongo.melbourne/wp-content/uploads/2016/08/Pokemon-GO-Pikachu-e1469089020164.jpg" alt=""></img>
-                </div>
-
-                <div class="col-md-4">
-                    <h3 class="my-3">Description :</h3>
-                    <h:outputLabel value="#{articleBean.article.description}" />
-                    <h3 class="my-3">Prix de départ :</h3>
-                    <h:outputLabel value="#{articleBean.article.startingPrice}" />
-                    <h3 class="my-3">Date de fin des enchères :</h3>
-                    <h:outputLabel value="#{articleBean.article.endDate}">
-                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                    </h:outputLabel>
-                    <h3 class="my-3">Enchère la plus élevée :</h3>
-                    <h:outputLabel value="#{biddingBean.getHighestBiddingValue(articleBean.articleId)}" />
-                </div>
-
+                    <!-- TODO change default id user -->
+                    <h:commandButton class="btn btn-primary" value="Connexion" action="#{userBean.authenticate()}"/>
+                </h:form>
             </div>
-            <br></br>
-            <!-- /.row -->
-
-            <div class="row">
-                <div class="col-lg-8 mb-4">
-                    <h3>Participer aux enchères : </h3>
-                    <h:form id="biddingForm" >
-                        <h:outputLabel>Proposition : </h:outputLabel>
-                        <h:inputText id="price" class="form-control" value="#{biddingBean.bidding.amount}" />
-                        <br/>
-
-                        <!-- TODO change default id user -->
-                        <h:commandButton class="btn btn-primary" value="Enchérir" 
-                                         action="#{biddingBean.bid(articleBean.articleId, 9)}" />
-                    </h:form>
-                </div>
-            </div>
-            <br></br>
-
+            <br/>
         </div>
         <!-- /.container -->
 

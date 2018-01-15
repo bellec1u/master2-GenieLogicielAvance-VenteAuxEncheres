@@ -29,7 +29,9 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "User.findAll", 
             query = "select u from User u"),
     @NamedQuery(name = "User.findById", 
-            query = "select u from User u where u.id = :id")
+            query = "select u from User u where u.id = :id"),
+    @NamedQuery(name = "User.findByLogin",
+            query = "select u from User u where u.login = :login")
 })
 public class User implements Serializable {
 

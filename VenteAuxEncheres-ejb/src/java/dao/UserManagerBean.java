@@ -35,5 +35,17 @@ public class UserManagerBean extends AbstractManager<User> {
         user.addBidding(bid);
         edit(user);
     }
-    
+
+    public User getByCredentials(String login, String password) {
+        User result = getEntityManager()
+                .createNamedQuery("User.findByLogin", User.class)
+                .setParameter("login", login)
+                .getSingleResult();
+        
+        if (result.getPassword().equals(password))
+            return result;
+        else
+            return null;
+    }
+
 }
