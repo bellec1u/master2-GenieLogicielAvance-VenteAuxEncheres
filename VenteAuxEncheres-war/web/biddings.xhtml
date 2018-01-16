@@ -17,13 +17,28 @@
             <ui:define name="content">
                 <h2>Liste des enchères :</h2>
 
-                <div class="list-group">
-                    <ui:repeat var="bidding" value="#{biddingBean.getBiddingsForUserId(navigationManagedBean.currentId)}">
-                        <h:link class="list-group-item list-group-item-action" outcome="article" value="#{bidding.article.name}">
-                            <f:param name="articleID" value="#{bidding.article.id}" />
-                        </h:link>
-                    </ui:repeat>
-                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Article</th>
+                            <th scope="col">Statut</th>
+                            <th scope="col">Valeur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ui:repeat var="bidding" value="#{biddingBean.getBiddingsForUserId(navigationManagedBean.currentId)}">
+                            <tr>
+                                <td>
+                                    <h:link outcome="article" value="#{bidding.article.name}">
+                                        <f:param name="articleID" value="#{bidding.article.id}" />
+                                    </h:link>
+                                </td>
+                                <td>#{biddingBean.getBiddingStatus(bidding)}</td>
+                                <td>#{bidding.amount}</td>
+                            </tr>
+                        </ui:repeat>
+                    </tbody>
+                </table>
             </ui:define>
 
         </ui:composition>

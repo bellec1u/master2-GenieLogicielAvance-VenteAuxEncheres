@@ -9,6 +9,7 @@ import dao.ArticleManagerBean;
 import dao.BiddingManagerBean;
 import dao.UserManagerBean;
 import entity.Bidding;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -51,17 +52,27 @@ public class BiddingBean {
         return "index";
     }
 
-    public String getHighestBiddingValue(Long articleID) {        
-        double bid = biddingManager.getHighestBiddingValue(articleID);     
+    public String getHighestBiddingValue(Long articleID) {
+        double bid = biddingManager.getHighestBiddingValue(articleID);
         if (bid == -1) {
             return "Pas encore d'enchères.";
         } else {
             return bid + "";
         }
     }
-    
+
     public List<Bidding> getBiddingsForUserId(Long userID) {
         return userManager.getAllBiddingsByUser(userID);
+    }
+
+    public String getBiddingStatus(Bidding bidding) {
+        if ((bidding.getArticle().getEndDate().compareTo(new Date())) < 0) {
+            if (biddingManager.getHighestBiddingValue(bidding.getArticle().getId()) == bidding.getAmount()) {
+                return "Gagnée";
+            }
+            return "Perdue";
+        }
+        return "En cours";
     }
 
     public Bidding getBidding() {
