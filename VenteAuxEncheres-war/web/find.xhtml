@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
     </h:head>
     <h:body>
@@ -19,16 +20,17 @@
                         <legend>Rechercher un article </legend>
 
                         <h:outputLabel for="name">Nom </h:outputLabel>
-                        <h:inputText id="name" value="#{articleResearchManagedBean.name}" />
+                        <h:inputText id="name" class="form-control" value="#{articleResearchManagedBean.name}" />
                         <br/>
 
                         <h:outputLabel for="description">Description </h:outputLabel>
-                        <h:inputTextarea id="description" value="#{articleResearchManagedBean.categories}" />
+                        <h:inputTextarea id="description" class="form-control" value="#{articleResearchManagedBean.categories}" />
                         <br/>
 
-                        <h:commandButton value="Rechercher" action="#{articleResearchManagedBean.findArticles()}" />
+                        <h:commandButton class="btn btn-primary" value="Rechercher" action="#{articleResearchManagedBean.findArticles()}" />
                     </fieldset>
                 </h:form>
+                <br></br>
 
                 <table>
                     <div class="row">
@@ -39,7 +41,9 @@
                                     <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></img></a>
                                     <div class="card-body">
                                         <h4 class="card-title">
-                                            <a href="#">#{elem.name}</a>
+                                            <h:link outcome="article" value="#{elem.name}">
+                                                <f:param name="articleID" value="#{elem.id}" />
+                                            </h:link>
                                         </h4>
                                         <p class="card-text">#{elem.description}</p>
                                     </div>

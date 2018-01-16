@@ -52,21 +52,23 @@
                 <br></br>
                 <!-- /.row -->
 
-                <div class="row">
-                    <div class="col-lg-8 mb-4">
-                        <h3>Participer aux enchères : </h3>
-                        <h:form id="biddingForm" >
-                            <h:outputLabel>Proposition : </h:outputLabel>
-                            <h:inputText id="price" class="form-control" value="#{biddingBean.bidding.amount}" />
-                            <br/>
+                <c:if test="#{not empty navigationManagedBean.currentLogin}">
+                    <div class="row">
+                        <div class="col-lg-8 mb-4">
+                            <h3>Participer aux enchères : </h3>
+                            <h:form id="biddingForm" >
+                                <h:outputLabel>Proposition : </h:outputLabel>
+                                <h:inputText id="price" class="form-control" value="#{biddingBean.bidding.amount}" />
+                                <br/>
 
-                            <!-- TODO change default id user -->
-                            <h:commandButton class="btn btn-primary" value="Enchérir" 
-                                             action="#{biddingBean.bid(articleBean.articleId, 9)}" />
-                        </h:form>
+                                <!-- TODO change default id user -->
+                                <h:commandButton class="btn btn-primary" value="Enchérir" 
+                                                 action="#{biddingBean.bid(articleBean.articleId, 9)}" />
+                            </h:form>
+                        </div>
                     </div>
-                </div>
-                <br></br>
+                    <br></br>
+                </c:if>
             </ui:define>
 
         </ui:composition>
