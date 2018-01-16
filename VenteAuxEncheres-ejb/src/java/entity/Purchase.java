@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -20,6 +22,10 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name="Purchases")
+@NamedQueries({
+    @NamedQuery(name = "Purchase.findAll", 
+            query = "select p from Purchase p")
+})
 public class Purchase implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -122,4 +128,7 @@ public class Purchase implements Serializable {
         return "Purchase{" + "id=" + id + ", address=" + address + ", bankAccountNumber=" + bankAccountNumber + ", isShipped=" + isShipped + ", isPayed=" + isPayed + '}';
     }
     
+    public String toJSON() {
+        return "{\"id\": " + id + ", \"address\": \"" + address + "\", \"bankAccountNumber\": \"" + bankAccountNumber + "\", \"isShipped\": " + isShipped + ", \"isPayed\": " + isPayed + "}";
+    }
 }
