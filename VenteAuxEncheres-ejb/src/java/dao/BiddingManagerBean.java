@@ -31,6 +31,19 @@ public class BiddingManagerBean extends AbstractManager<Bidding> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    
+    public Bidding getByUserAndArticle(Long articleID, Long userID) {
+        try {
+            TypedQuery<Bidding> query = getEntityManager()
+                    .createNamedQuery("Bidding.findByUserAndArticle", Bidding.class);
+            
+            return query.setParameter("articleId", articleID)
+                    .setParameter("userId", userID)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 
     public double getHighestBiddingValue(Long articleID) {
         try {

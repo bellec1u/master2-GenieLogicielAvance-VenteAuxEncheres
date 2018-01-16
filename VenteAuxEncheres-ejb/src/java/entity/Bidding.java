@@ -24,7 +24,10 @@ import javax.validation.constraints.NotNull;
 @Table(name="Biddings")
 @NamedQueries({
     @NamedQuery(name = "Bidding.findHighestBidding", 
-            query = "select b from Bidding b where b.amount = (select max(b2.amount) from Bidding b2 where b2.article.id = :id)")
+            query = "select b from Bidding b where b.article.id = :id AND b.amount = "
+                  + "(select max(b2.amount) from Bidding b2 where b2.article.id = :id)"),
+    @NamedQuery(name = "Bidding.findByUserAndArticle",
+            query = "SELECT b from Bidding b where b.article.id = :articleId AND b.user.id = :userId")
 })
 public class Bidding implements Serializable {
 
@@ -37,6 +40,9 @@ public class Bidding implements Serializable {
     
     @ManyToOne
     private Article article;
+    
+    @ManyToOne
+    private User user;
 
     public Bidding() {
         
@@ -68,6 +74,14 @@ public class Bidding implements Serializable {
 
     public void setArticle(Article article) {
         this.article = article;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

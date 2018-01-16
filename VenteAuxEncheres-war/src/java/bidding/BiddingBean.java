@@ -39,16 +39,19 @@ public class BiddingBean {
     }
 
     public String bid(Long articleID, Long userID) {
-        System.out.println("----- " + articleID + " - " + userID);
         if ((biddingManager.getHighestBiddingValue(articleID) == -1 && articleManager.getById(articleID).getStartingPrice() < bidding.getAmount())
                 || biddingManager.getHighestBiddingValue(articleID) < bidding.getAmount()) {
-            System.out.println("----- - " + bidding.getAmount());
-            Bidding bid = biddingManager.create(bidding);
-            System.out.println("----- - - " + bid);
-            userManager.addBidding(bid, userID);
-            articleManager.addBidding(bid, articleID);
+            Bidding bid = biddingManager.getByUserAndArticle(articleID, userID);
+            if (bid != null) {
+                bid.setAmount(bidding.getAmount());
+                biddingManager.edit(bid);
+            } else {
+                Bidding newBid = biddingManager.create(bidding);
+                userManager.addBidding(newBid, userID);
+                articleManager.addBidding(newBid, articleID);
+            }
         }
-        return "index";
+        return "article?faces-redirect=true&includeViewParams=true";
     }
 
     public String getHighestBiddingValue(Long articleID) {        

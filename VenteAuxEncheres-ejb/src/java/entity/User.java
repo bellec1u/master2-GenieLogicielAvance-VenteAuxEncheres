@@ -60,7 +60,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Article> articles;
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Bidding> biddings;
     
     public User() {
@@ -192,6 +192,7 @@ public class User implements Serializable {
     }
     
     public void addBidding(Bidding bidding) {
+        bidding.setUser(this);
         biddings.add(bidding);
     }
 

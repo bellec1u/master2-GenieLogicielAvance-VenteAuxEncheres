@@ -8,19 +8,12 @@ package user;
 import cookie.CookieHelper;
 import dao.UserManagerBean;
 import entity.User;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.concurrent.TimeUnit;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -38,7 +31,7 @@ public class UserBean {
     private String login, password;
     private User user;
     
-    public void authenticate() {
+    public String authenticate() {
         user = userManager.getByCredentials(login, password);
         
         //expiration
@@ -63,9 +56,11 @@ public class UserBean {
         CookieHelper.setCookie("authentication_id", user.getId() + "", (int) TimeUnit.MINUTES.toSeconds(15));
         CookieHelper.setCookie("authentication_login", user.getLogin() + "", (int) TimeUnit.MINUTES.toSeconds(15));
         
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        String outcome = "index.xhtml";
-        facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, outcome);
+//        FacesContext facesContext = FacesContext.getCurrentInstance();
+//        String outcome = "index.xhtml";
+//        facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, outcome);
+        
+        return "index?faces-redirect=true";
     }
     
     public void disconnect() {

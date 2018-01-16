@@ -9,6 +9,7 @@ import dao.ArticleManagerBean;
 import dao.UserManagerBean;
 import entity.Article;
 import java.util.List;
+import java.util.Objects;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -76,5 +77,12 @@ public class ArticleBean {
         } else {
             return article.getOwner().getLogin();
         }
+    }
+    
+    public boolean isArticleOwner(Long userID) {
+        if (article == null) {
+            System.out.println("######### NULL");
+        }
+        return Objects.equals(article.getOwner().getId(), userID);
     }
 }
