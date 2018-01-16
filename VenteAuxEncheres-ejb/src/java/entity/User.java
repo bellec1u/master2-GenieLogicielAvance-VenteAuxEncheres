@@ -57,7 +57,7 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Purchase> purchases;
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Article> articles;
     
     @OneToMany(cascade = CascadeType.ALL)
@@ -121,6 +121,10 @@ public class User implements Serializable {
         this.firstName = firstName;
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -175,6 +179,7 @@ public class User implements Serializable {
     }
     
     public void addArticle(Article article) {
+        article.setOwner(this);
         articles.add(article);
     }
 

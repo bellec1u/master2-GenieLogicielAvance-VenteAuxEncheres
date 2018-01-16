@@ -32,7 +32,6 @@ public class ArticleBean {
     private Long articleId;
     
     private Article article;
-    private String sellerLogin;
         
     /**
      * Creates a new instance of ArticleManagedBean
@@ -48,7 +47,6 @@ public class ArticleBean {
 
     public void findArticle() {
         article = articleManager.getById(articleId);
-        sellerLogin = "Not available yet";
     }
     
     public List<Article> getAllArticles() {
@@ -72,6 +70,11 @@ public class ArticleBean {
     }
     
     public String getSellerLogin() {
-        return sellerLogin;
+        Article article = articleManager.getById(articleId);
+        if (article == null) {
+            return "Not available yet";
+        } else {
+            return article.getOwner().getLogin();
+        }
     }
 }
