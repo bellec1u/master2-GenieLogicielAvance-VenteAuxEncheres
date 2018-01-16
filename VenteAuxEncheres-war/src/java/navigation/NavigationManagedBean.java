@@ -2,7 +2,7 @@
 * To change this license header, choose License Headers in Project Properties.
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
-*/
+ */
 package navigation;
 
 import cookie.CookieHelper;
@@ -23,32 +23,36 @@ import javax.servlet.http.Cookie;
 @Named(value = "navigationManagedBean")
 @RequestScoped
 public class NavigationManagedBean {
-    
+
     private List<NavigationElement> listMenu;
     private Long currentId;
     private String currentLogin;
-    
+
     public NavigationManagedBean() {
         this.listMenu = new ArrayList<>();
-        
+
         Cookie cookieId = CookieHelper.getCookie("authentication_id");
         Cookie cookieLogin = CookieHelper.getCookie("authentication_login");
-        
+
         currentLogin = null;
-        
+
+        this.listMenu.add(new NavigationElement("Rechercher un article", "find.xhtml"));
+
         if ((cookieId == null) || (cookieLogin == null)) {
+            this.listMenu.add(new NavigationElement("Inscription", "registration.xhtml"));
             this.listMenu.add(new NavigationElement("Connexion", "connexion.xhtml"));
         } else {
             this.listMenu.add(new NavigationElement("Ajouter un article", "newArticle.xhtml"));
+            this.listMenu.add(new NavigationElement("Liste des enchères", "biddings.xhtml"));
             currentId = Long.parseLong(cookieId.getValue());
             currentLogin = cookieLogin.getValue();
         }
     }
-    
+
     public List<NavigationElement> getListMenu() {
         return listMenu;
     }
-    
+
     public void setListMenu(List<NavigationElement> listMenu) {
         this.listMenu = listMenu;
     }
