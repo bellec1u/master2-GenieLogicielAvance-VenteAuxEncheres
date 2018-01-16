@@ -61,7 +61,6 @@ public class BiddingBean {
     }
     
     public List<Bidding> getBiddingsForUserId(Long userID) {
-        System.out.println("----- " + userID);
         return userManager.getAllBiddingsByUser(userID);
     }
 

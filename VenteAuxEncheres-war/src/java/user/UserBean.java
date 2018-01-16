@@ -68,11 +68,13 @@ public class UserBean {
         facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, outcome);
     }
     
-    public void disconnect() {
+    public String disconnect() {
         System.out.println("user.UserBean.disconnect()");
         
         CookieHelper.removeCookie("authentication_id");
         CookieHelper.removeCookie("authentication_login");
+        
+        return "index.xhtml";
     }
     
     public String getLogin() {
