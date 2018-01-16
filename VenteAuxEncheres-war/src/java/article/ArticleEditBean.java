@@ -6,11 +6,14 @@
 package article;
 
 import dao.ArticleManagerBean;
+import dao.UserManagerBean;
 import entity.Article;
+import entity.User;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import navigation.NavigationManagedBean;
 
 /**
  *
@@ -23,6 +26,11 @@ public class ArticleEditBean {
     @EJB
     private ArticleManagerBean articleManager;
     
+    @EJB
+    private UserManagerBean userManager;
+
+    private NavigationManagedBean navigationBean;
+    
     private Long id;
     private Article article;
         
@@ -32,6 +40,7 @@ public class ArticleEditBean {
     public ArticleEditBean() {
         this.article = new Article();
         this.article.setEndDate(new Date());
+        this.navigationBean = new NavigationManagedBean();
     }
 
     public Long getId() {
@@ -58,6 +67,9 @@ public class ArticleEditBean {
     
     public void create() {
         articleManager.create(article);
+        User user = userManager.getById(navigationBean.getCurrentId());
+        user.addArticle(article);
+        userManager.edit(user);
     }
     
     public String edit() {

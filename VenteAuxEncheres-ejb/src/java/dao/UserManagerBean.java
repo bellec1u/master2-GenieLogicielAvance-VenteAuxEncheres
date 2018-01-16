@@ -5,6 +5,7 @@
  */
 package dao;
 
+import entity.Article;
 import entity.Bidding;
 import entity.User;
 import javax.ejb.Stateless;

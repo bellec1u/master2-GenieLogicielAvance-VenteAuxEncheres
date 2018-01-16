@@ -6,6 +6,7 @@
 package article;
 
 import dao.ArticleManagerBean;
+import dao.UserManagerBean;
 import entity.Article;
 import java.util.List;
 import javax.ejb.EJB;
@@ -24,10 +25,14 @@ public class ArticleBean {
     @EJB
     private ArticleManagerBean articleManager;
     
+    @EJB
+    private UserManagerBean userManager;
+    
     @ManagedProperty(value = "#{param.userID}")
     private Long articleId;
     
     private Article article;
+    private String sellerLogin;
         
     /**
      * Creates a new instance of ArticleManagedBean
@@ -43,6 +48,7 @@ public class ArticleBean {
 
     public void findArticle() {
         article = articleManager.getById(articleId);
+        sellerLogin = "Not available yet";
     }
     
     public List<Article> getAllArticles() {
@@ -65,4 +71,7 @@ public class ArticleBean {
         this.article = article;
     }
     
+    public String getSellerLogin() {
+        return sellerLogin;
+    }
 }

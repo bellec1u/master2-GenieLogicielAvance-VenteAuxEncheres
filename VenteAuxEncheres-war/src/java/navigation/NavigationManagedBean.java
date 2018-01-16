@@ -25,7 +25,7 @@ import javax.servlet.http.Cookie;
 public class NavigationManagedBean {
     
     private List<NavigationElement> listMenu;
-    private int currentId;
+    private Long currentId;
     private String currentLogin;
     
     public NavigationManagedBean() {
@@ -40,7 +40,7 @@ public class NavigationManagedBean {
             this.listMenu.add(new NavigationElement("Connexion", "connexion.xhtml"));
         } else {
             this.listMenu.add(new NavigationElement("Ajouter un article", "newArticle.xhtml"));
-            currentId = Integer.parseInt(cookieId.getValue());
+            currentId = Long.parseLong(cookieId.getValue());
             currentLogin = cookieLogin.getValue();
         }
     }
@@ -53,7 +53,7 @@ public class NavigationManagedBean {
         this.listMenu = listMenu;
     }
 
-    public int getCurrentId() {
+    public Long getCurrentId() {
         return currentId;
     }
 
