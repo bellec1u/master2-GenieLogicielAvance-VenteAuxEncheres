@@ -4,44 +4,55 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h:form>
-            <fieldset>
-                <legend>Rechercher un article </legend>
 
-                <h:outputLabel for="name">Nom </h:outputLabel>
-                <h:inputText id="name" value="#{articleResearchManagedBean.name}" />
-                <br/>
+        <ui:composition template="common/layout.xhtml">
 
-                <h:outputLabel for="description">Description </h:outputLabel>
-                <h:inputTextarea id="description" value="#{articleResearchManagedBean.categories}" />
-                <br/>
+            <ui:define name="htmlhead">
+                <title>Rechercher article</title>
+            </ui:define>
 
-                <h:commandButton value="Rechercher" action="#{articleResearchManagedBean.findArticles()}" />
-            </fieldset>
-        </h:form>
-        
-        <table>
-                <div class="row">
-                    <ui:repeat var="elem" value="#{articleResearchManagedBean.articles}">
-                        
-                        <div class="col-lg-4 col-sm-6 portfolio-item">
-                            <div class="card h-100">
-                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></img></a>
-                                <div class="card-body">
-                                    <h4 class="card-title">
-                                        <a href="#">#{elem.name}</a>
-                                    </h4>
-                                    <p class="card-text">#{elem.description}</p>
+            <ui:define name="content">
+                <h:form>
+                    <fieldset>
+                        <legend>Rechercher un article </legend>
+
+                        <h:outputLabel for="name">Nom </h:outputLabel>
+                        <h:inputText id="name" value="#{articleResearchManagedBean.name}" />
+                        <br/>
+
+                        <h:outputLabel for="description">Description </h:outputLabel>
+                        <h:inputTextarea id="description" value="#{articleResearchManagedBean.categories}" />
+                        <br/>
+
+                        <h:commandButton value="Rechercher" action="#{articleResearchManagedBean.findArticles()}" />
+                    </fieldset>
+                </h:form>
+
+                <table>
+                    <div class="row">
+                        <ui:repeat var="elem" value="#{articleResearchManagedBean.articles}">
+
+                            <div class="col-lg-4 col-sm-6 portfolio-item">
+                                <div class="card h-100">
+                                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></img></a>
+                                    <div class="card-body">
+                                        <h4 class="card-title">
+                                            <a href="#">#{elem.name}</a>
+                                        </h4>
+                                        <p class="card-text">#{elem.description}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                    </ui:repeat>
-                </div>
-            </table>
+
+                        </ui:repeat>
+                    </div>
+                </table>
+            </ui:define>
+
+        </ui:composition>
+
     </h:body>
 </html>
 

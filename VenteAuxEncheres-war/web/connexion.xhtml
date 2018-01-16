@@ -6,92 +6,39 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-
-        <meta charset="utf-8"></meta>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
-        <meta name="description" content=""></meta>
-        <meta name="author" content=""></meta>
-
-        <title>Modern Business - Start Bootstrap Template</title>
-
-        <!-- Bootstrap core CSS -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
-
-        <!-- Custom styles for this template -->
-        <link href="css/modern-business.css" rel="stylesheet"></link>
-
     </h:head>
 
     <h:body>
 
-        <!-- Navigation -->
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <div class="container">
-                <a class="navbar-brand" href="index.xhtml">Ventes aux enchères</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" action="#{userBean.disconnect()}" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
+        <ui:composition template="common/layout.xhtml">
 
-                        <ui:repeat var="elem" value="#{navigationManagedBean.listMenu}">
+            <ui:define name="htmlhead">
+                <title>Connexion</title>
+            </ui:define>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="#{elem.link}">#{elem.displayName}</a>
-                            </li>
+            <ui:define name="content">
+                <!-- Page Heading/Breadcrumbs -->
+                <h1 class="mt-4 mb-3" align="center">
+                    Connectez-vous
+                </h1>
 
-                        </ui:repeat>
-                        
-                        <c:if test="#{not empty navigationManagedBean.currentLogin}">
-                            <li class="nav-item">
-                                <span class="navbar-brand">Bonjour, #{navigationManagedBean.currentLogin} !</span>
-                            </li>
-                        </c:if>
-                    </ul>
+                <div>
+                    <h:form id="loginForm" >
+                        <h:outputLabel>Login : </h:outputLabel>
+                        <h:inputText id="login" class="form-control" value="#{userBean.login}" />
+                        <br/>
+                        <h:outputLabel>Mot de Passe : </h:outputLabel>
+                        <h:inputSecret id="password" class="form-control" value="#{userBean.password}" />
+                        <br/>
+
+                        <!-- TODO change default id user -->
+                        <h:commandButton class="btn btn-primary" value="Connexion" action="#{userBean.authenticate()}"/>
+                    </h:form>
                 </div>
-            </div>
-        </nav>
+                <br/>
+            </ui:define>
 
-
-
-        <!-- Page Content -->
-        <div class="container">
-            <!-- Page Heading/Breadcrumbs -->
-            <h1 class="mt-4 mb-3" align="center">
-                Connectez-vous
-            </h1>
-            
-            <div>
-                <h:form id="loginForm" >
-                    <h:outputLabel>Login : </h:outputLabel>
-                    <h:inputText id="login" class="form-control" value="#{userBean.login}" />
-                    <br/>
-                    <h:outputLabel>Mot de Passe : </h:outputLabel>
-                    <h:inputSecret id="password" class="form-control" value="#{userBean.password}" />
-                    <br/>
-
-                    <!-- TODO change default id user -->
-                    <h:commandButton class="btn btn-primary" value="Connexion" action="#{userBean.authenticate()}"/>
-                </h:form>
-            </div>
-            <br/>
-        </div>
-        <!-- /.container -->
-
-
-
-        <!-- Footer -->
-        <footer class="py-5 bg-dark">
-            <div class="container">
-                <p class="m-0 text-center text-white">Copyright &copy; Ventes aux enchères 2017</p>
-            </div>
-        </footer>
-        <!-- /.container -->
-
-        <!-- Bootstrap core JavaScript -->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- /.container -->
+        </ui:composition>
 
     </h:body>
 </html>

@@ -6,130 +6,70 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-
-        <meta charset="utf-8"></meta>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
-        <meta name="description" content=""></meta>
-        <meta name="author" content=""></meta>
-
-        <title>Modern Business - Start Bootstrap Template</title>
-
-        <!-- Bootstrap core CSS -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
-
-        <!-- Custom styles for this template -->
-        <link href="css/modern-business.css" rel="stylesheet"></link>
-
-        <f:metadata>
-            <f:viewParam name="articleID" value="#{articleBean.articleId}" />
-            <f:viewAction action="#{articleBean.findArticle()}" />
-        </f:metadata>
-
     </h:head>
 
     <h:body>
 
-        <!-- Navigation -->
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <div class="container">
-                <a class="navbar-brand" href="index.xhtml">Ventes aux enchères</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
+        <ui:composition template="common/layout.xhtml">
 
-                        <ui:repeat var="elem" value="#{navigationManagedBean.listMenu}">
+            <ui:define name="htmlhead">
+                <title>Article</title>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="#{elem.link}">#{elem.displayName}</a>
-                            </li>
+                <f:metadata>
+                    <f:viewParam name="articleID" value="#{articleBean.articleId}" />
+                    <f:viewAction action="#{articleBean.findArticle()}" />
+                </f:metadata>
+            </ui:define>
 
-                        </ui:repeat>
+            <ui:define name="content">
+                <h1 class="mt-4 mb-3">Article : 
+                    <small>#{articleBean.article.name}</small>
+                </h1>
 
-                        <c:if test="#{not empty navigationManagedBean.currentLogin}">
-                            <li class="nav-item">
-                                <h:form>
-                                    <h:commandLink class="nav-link" action="#{userBean.disconnect()}">Déconnexion</h:commandLink>
-                                </h:form>
-                            </li>
-                            <li class="nav-item">
-                                <span class="navbar-brand">Bonjour, #{navigationManagedBean.currentLogin} !</span>
-                            </li>
-                        </c:if>
-                    </ul>
+                <!-- Portfolio Item Row -->
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <img class="img-fluid" src="http://pokemongo.melbourne/wp-content/uploads/2016/08/Pokemon-GO-Pikachu-e1469089020164.jpg" alt=""></img>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h3 class="my-3">Description :</h3>
+                        <h:outputLabel value="#{articleBean.article.description}" />
+                        <h3 class="my-3">Prix de départ :</h3>
+                        <h:outputLabel value="#{articleBean.article.startingPrice}" />
+                        <h3 class="my-3">Date de fin des enchères :</h3>
+                        <h:outputLabel value="#{articleBean.article.endDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputLabel>
+                        <h3 class="my-3">Enchère la plus élevée :</h3>
+                        <h:outputLabel value="#{biddingBean.getHighestBiddingValue(articleBean.articleId)}" />
+                        <h3 class="my-3">Vendeur :</h3>
+                        <h:outputLabel value="#{articleBean.sellerLogin}" />
+                    </div>
+
                 </div>
-            </div>
-        </nav>
+                <br></br>
+                <!-- /.row -->
 
+                <div class="row">
+                    <div class="col-lg-8 mb-4">
+                        <h3>Participer aux enchères : </h3>
+                        <h:form id="biddingForm" >
+                            <h:outputLabel>Proposition : </h:outputLabel>
+                            <h:inputText id="price" class="form-control" value="#{biddingBean.bidding.amount}" />
+                            <br/>
 
-
-        <!-- Page Content -->
-        <div class="container">
-            <!-- Page Heading/Breadcrumbs -->
-            <h1 class="mt-4 mb-3">Article : 
-                <small>#{articleBean.article.name}</small>
-            </h1>
-
-            <!-- Portfolio Item Row -->
-            <div class="row">
-
-                <div class="col-md-8">
-                    <img class="img-fluid" src="http://pokemongo.melbourne/wp-content/uploads/2016/08/Pokemon-GO-Pikachu-e1469089020164.jpg" alt=""></img>
+                            <!-- TODO change default id user -->
+                            <h:commandButton class="btn btn-primary" value="Enchérir" 
+                                             action="#{biddingBean.bid(articleBean.articleId, 9)}" />
+                        </h:form>
+                    </div>
                 </div>
+                <br></br>
+            </ui:define>
 
-                <div class="col-md-4">
-                    <h3 class="my-3">Description :</h3>
-                    <h:outputLabel value="#{articleBean.article.description}" />
-                    <h3 class="my-3">Prix de départ :</h3>
-                    <h:outputLabel value="#{articleBean.article.startingPrice}" />
-                    <h3 class="my-3">Date de fin des enchères :</h3>
-                    <h:outputLabel value="#{articleBean.article.endDate}">
-                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                    </h:outputLabel>
-                    <h3 class="my-3">Enchère la plus élevée :</h3>
-                    <h:outputLabel value="#{biddingBean.getHighestBiddingValue(articleBean.articleId)}" />
-                    <h3 class="my-3">Vendeur :</h3>
-                    <h:outputLabel value="#{articleBean.sellerLogin}" />
-                </div>
-
-            </div>
-            <br></br>
-            <!-- /.row -->
-
-            <div class="row">
-                <div class="col-lg-8 mb-4">
-                    <h3>Participer aux enchères : </h3>
-                    <h:form id="biddingForm" >
-                        <h:outputLabel>Proposition : </h:outputLabel>
-                        <h:inputText id="price" class="form-control" value="#{biddingBean.bidding.amount}" />
-                        <br/>
-
-                        <!-- TODO change default id user -->
-                        <h:commandButton class="btn btn-primary" value="Enchérir" 
-                                         action="#{biddingBean.bid(articleBean.articleId, 9)}" />
-                    </h:form>
-                </div>
-            </div>
-            <br></br>
-
-        </div>
-        <!-- /.container -->
-
-
-
-        <!-- Footer -->
-        <footer class="py-5 bg-dark">
-            <div class="container">
-                <p class="m-0 text-center text-white">Copyright &copy; Ventes aux enchères 2017</p>
-            </div>
-        </footer>
-        <!-- /.container -->
-
-        <!-- Bootstrap core JavaScript -->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- /.container -->
+        </ui:composition>
 
     </h:body>
 </html>

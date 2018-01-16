@@ -8,6 +8,7 @@ package dao;
 import entity.Article;
 import entity.Bidding;
 import entity.User;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -35,6 +36,14 @@ public class UserManagerBean extends AbstractManager<User> {
         User user = getById(userID);
         user.addBidding(bid);
         edit(user);
+    }
+    
+    public List<Bidding> getAllBiddingsByUser(Long userID) {
+        User user = getById(userID);
+        if (user != null) {
+            return user.getBiddings();
+        }
+        return null;
     }
 
     public User getByCredentials(String login, String password) {
