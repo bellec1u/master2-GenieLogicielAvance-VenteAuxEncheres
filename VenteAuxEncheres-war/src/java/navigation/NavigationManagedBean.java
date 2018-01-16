@@ -39,6 +39,7 @@ public class NavigationManagedBean {
         if ((cookieId == null) || (cookieLogin == null)) {
             this.listMenu.add(new NavigationElement("Connexion", "connexion.xhtml"));
         } else {
+            this.listMenu.add(new NavigationElement("Ajouter un article", "newArticle.xhtml"));
             currentId = Integer.parseInt(cookieId.getValue());
             currentLogin = cookieLogin.getValue();
         }
