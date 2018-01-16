@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+    </h:head>
+
+    <h:body>
+
+        <ui:composition template="common/layout.xhtml">
+
+            <ui:define name="htmlhead">
+                <title>Inscription</title>
+            </ui:define>
+
+            <ui:define name="content">
+                <!-- Page Heading/Breadcrumbs -->
+                <h1 class="mt-4 mb-3" align="center">
+                    Inscrivez vous !
+                </h1>
+<!--
+private String login;
+    private String password;
+    private String lastName;
+    private String firstName;
+    private String address;
+-->
+                <div>
+                    <h:form id="loginForm" >
+                        <h:outputLabel>Login : </h:outputLabel>
+                        <h:inputText id="login" class="form-control" value="#{userRegisterBean.login}" />
+                        <br/>
+                        
+                        <h:outputLabel>Mot de Passe : </h:outputLabel>
+                        <h:inputSecret id="password" class="form-control" value="#{userRegisterBean.password}" />
+                        <br/>
+                        
+                        <h:outputLabel>Validation du mot de Passe : </h:outputLabel>
+                        <h:inputSecret id="passwordValidation" class="form-control" value="#{userRegisterBean.passwordValidation}" />
+                        <br/>
+                        
+                        <h:outputLabel>Nom : </h:outputLabel>
+                        <h:inputText id="lastname" class="form-control" value="#{userRegisterBean.lastname}" />
+                        <br/>
+                        
+                        <h:outputLabel>Prénom : </h:outputLabel>
+                        <h:inputText id="firstname" class="form-control" value="#{userRegisterBean.firstname}" />
+                        <br/>
+                        
+                        <h:outputLabel>Adresse : </h:outputLabel>
+                        <h:inputText id="address" class="form-control" value="#{userRegisterBean.address}" />
+                        <br/>
+
+                        <h:commandButton class="btn btn-primary" value="S'inscrire" action="#{userRegisterBean.register()}"/>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>
+

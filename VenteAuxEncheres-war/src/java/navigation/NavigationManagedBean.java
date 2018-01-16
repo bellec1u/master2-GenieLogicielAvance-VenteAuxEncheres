@@ -39,6 +39,7 @@ public class NavigationManagedBean {
         this.listMenu.add(new NavigationElement("Rechercher un article", "find.xhtml"));
 
         if ((cookieId == null) || (cookieLogin == null)) {
+            this.listMenu.add(new NavigationElement("Inscription", "registration.xhtml"));
             this.listMenu.add(new NavigationElement("Connexion", "connexion.xhtml"));
         } else {
             this.listMenu.add(new NavigationElement("Ajouter un article", "newArticle.xhtml"));
