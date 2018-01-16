@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -61,6 +62,9 @@ public class Article implements Serializable {
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private List<Bidding> biddings;
 
+    @ManyToOne
+    private User owner;
+    
     public Article() {
         
     }
@@ -143,6 +147,14 @@ public class Article implements Serializable {
     public void addBidding(Bidding bidding) {
         bidding.setArticle(this);
         biddings.add(bidding);
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
     
     public boolean hasEnded() {
