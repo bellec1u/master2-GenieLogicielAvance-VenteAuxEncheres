@@ -49,6 +49,11 @@
 
                         <c:if test="#{not empty navigationManagedBean.currentLogin}">
                             <li class="nav-item">
+                                <h:form>
+                                    <h:commandLink class="nav-link" action="#{userBean.disconnect()}">Déconnexion</h:commandLink>
+                                </h:form>
+                            </li>
+                            <li class="nav-item">
                                 <span class="navbar-brand">Bonjour, #{navigationManagedBean.currentLogin} !</span>
                             </li>
                         </c:if>

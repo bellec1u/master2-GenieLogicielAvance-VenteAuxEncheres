@@ -59,4 +59,27 @@ public class CookieHelper {
             }
         }
         return null;
-    }}
+    }
+    
+    public static void removeCookie(String name) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+
+        HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+        HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+        
+        Cookie cookie = null;
+        
+        Cookie[] userCookies = request.getCookies();
+        if (userCookies != null && userCookies.length > 0) {
+            for (int i = 0; i < userCookies.length; i++) {
+                if (userCookies[i].getName().equals(name)) {
+                    cookie = userCookies[i];
+                    cookie.setMaxAge(0);
+                    cookie.setPath(request.getContextPath());
+                    response.addCookie(cookie);
+                    return;
+                }
+            }
+        }
+    }
+}
