@@ -9,7 +9,7 @@ import dao.ArticleManagerBean;
 import dao.BiddingManagerBean;
 import dao.UserManagerBean;
 import entity.Bidding;
-import java.io.IOException;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -58,6 +58,11 @@ public class BiddingBean {
         } else {
             return bid + "";
         }
+    }
+    
+    public List<Bidding> getBiddingsForUserId(Long userID) {
+        System.out.println("----- " + userID);
+        return userManager.getAllBiddingsByUser(userID);
     }
 
     public Bidding getBidding() {

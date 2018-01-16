@@ -5,15 +5,13 @@
  */
 package dao;
 
-import entity.Article;
 import entity.Bidding;
 import entity.User;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
 /**
  *
@@ -45,7 +43,7 @@ public class UserManagerBean extends AbstractManager<User> {
         if (user != null) {
             return user.getBiddings();
         }
-        return null;
+        return new ArrayList<>();
     }
 
     public User getByCredentials(String login, String password) {
