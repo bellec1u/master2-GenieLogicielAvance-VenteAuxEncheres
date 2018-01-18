@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+    </h:head>
+    <h:body>
+        
+        <ui:composition template="common/layout.xhtml">
+            
+            <ui:define name="htmlhead">
+                <title>Faire une commande</title>
+            </ui:define>
+            
+            <ui:define name="content">
+                
+                <h2>Faire une commande de #{purchaseBean.bidding.article.name}</h2>
+                
+                <h:form>
+                    <h:outputLabel for="name">Adresse :</h:outputLabel>
+                    <h:inputText id="name" class="form-control" value="#{purchaseBean.purchase.address}" />
+                    <br/>
+
+                    <h:outputLabel for="bankAccount">Numéro de compte :</h:outputLabel>
+                    <h:inputText id="bankAccount" class="form-control" value="#{purchaseBean.purchase.bankAccountNumber}" />
+                    <br/>
+
+                    <h:commandButton value="Valider" class="btn btn-primary" action="#{purchaseBean.submitPurchase()}" />
+                </h:form>
+            </ui:define>
+            
+    	</ui:composition>
+        
+    </h:body>
+</html>
+
