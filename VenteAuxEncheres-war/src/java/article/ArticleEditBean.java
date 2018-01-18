@@ -13,6 +13,7 @@ import java.util.Date;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedProperty;
 import navigation.NavigationManagedBean;
 
 /**
@@ -31,7 +32,9 @@ public class ArticleEditBean {
 
     private NavigationManagedBean navigationBean;
     
-    private Long id;
+    @ManagedProperty(value = "#{param.articleID}")
+    private Long articleID;
+    
     private Article article;
         
     /**
@@ -43,26 +46,12 @@ public class ArticleEditBean {
         this.navigationBean = new NavigationManagedBean();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Article getArticle() {
         return article;
     }
 
     public void setArticle(Article article) {
         this.article = article;
-    }
-    
-    public String getEditForm() {
-        article = articleManager.getById(id);
-        
-        return "";
     }
     
     public void create() {
@@ -72,10 +61,24 @@ public class ArticleEditBean {
         userManager.edit(user);
     }
     
+    public void findArticle() {
+        article = articleManager.getById(articleID);
+        System.out.println("##### " + article.getId());
+    }
+    
     public String edit() {
+        article.setId(articleID);
         articleManager.edit(article);
         
-        return "";
+        return "index";
+    }
+
+    public Long getArticleID() {
+        return articleID;
+    }
+
+    public void setArticleID(Long articleID) {
+        this.articleID = articleID;
     }
     
 }

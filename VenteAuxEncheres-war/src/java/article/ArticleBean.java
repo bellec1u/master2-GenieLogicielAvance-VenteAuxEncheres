@@ -8,6 +8,8 @@ package article;
 import dao.ArticleManagerBean;
 import dao.UserManagerBean;
 import entity.Article;
+import entity.Bidding;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.ejb.EJB;
@@ -29,7 +31,7 @@ public class ArticleBean {
     @EJB
     private UserManagerBean userManager;
     
-    @ManagedProperty(value = "#{param.userID}")
+    @ManagedProperty(value = "#{param.articleID}")
     private Long articleId;
     
     private Article article;
@@ -85,4 +87,12 @@ public class ArticleBean {
         }
         return Objects.equals(article.getOwner().getId(), userID);
     }
+    
+    public String getArticleStatus(Article article) {
+        if (article.hasEnded()) {
+            return "Finie";
+        }
+        return "En cours";
+    }
+    
 }

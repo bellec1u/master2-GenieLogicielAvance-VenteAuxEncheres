@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="common/layout.xhtml">
+
+            <ui:define name="htmlhead">
+                <title>Ajouter un nouvel article</title>
+            </ui:define>
+
+            <ui:define name="content">
+                <h2>Liste des articles en vente :</h2>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Article</th>
+                            <th scope="col">Statut</th>
+                            <th scope="col">Enchère la plus haute</th>
+                            <th scope="col">Date de fin</th>
+                            <th scope="col">  </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ui:repeat var="article" value="#{userBean.getAllArticlesByUser(navigationManagedBean.currentId)}">
+                            <tr>
+                                <td>
+                                    <h:link outcome="article" value="#{article.name}">
+                                        <f:param name="articleID" value="#{article.id}" />
+                                    </h:link>
+                                </td>
+                                <td>#{articleBean.getArticleStatus(article)}</td>
+                                <td>#{biddingBean.getHighestBiddingValue(article.id)}</td>
+                                <td>
+                                    <h:outputLabel value="#{article.endDate}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputLabel>
+                                </td>
+                                <td>
+                                    <h:link class="btn btn-secondary" outcome="updateArticle" value="Modifier" rendered="#{article.hasEnded()}">
+                                        <f:param name="articleID" value="#{article.id}" />
+                                    </h:link>
+                                </td>
+                            </tr>
+                        </ui:repeat>
+                    </tbody>
+                </table>
+
+                <h2>Liste des enchères :</h2>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Article</th>
+                            <th scope="col">Statut</th>
+                            <th scope="col">Valeur de l'enchère</th>
+                            <th scope="col">Enchère la plus haute</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ui:repeat var="bidding" value="#{biddingBean.getBiddingsForUserId(navigationManagedBean.currentId)}">
+                            <tr>
+                                <td>
+                                    <h:link outcome="article" value="#{bidding.article.name}">
+                                        <f:param name="articleID" value="#{bidding.article.id}" />
+                                    </h:link>
+                                </td>
+                                <td>#{biddingBean.getBiddingStatus(bidding)}</td>
+                                <td>#{bidding.amount}</td>
+                                <td>#{biddingBean.getHighestBiddingValue(bidding.article.id)}</td>
+                            </tr>
+                        </ui:repeat>
+                    </tbody>
+                </table>
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>
+
