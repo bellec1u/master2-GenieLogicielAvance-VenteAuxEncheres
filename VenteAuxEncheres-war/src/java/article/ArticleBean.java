@@ -30,7 +30,7 @@ public class ArticleBean implements Serializable {
     @EJB
     private UserManagerBean userManager;
     
-    @ManagedProperty(value = "#{param.userID}")
+    @ManagedProperty(value = "#{param.articleID}")
     private Long articleId;
     
     private Article article;
@@ -86,4 +86,12 @@ public class ArticleBean implements Serializable {
         }
         return Objects.equals(article.getOwner().getId(), userID);
     }
+    
+    public String getArticleStatus(Article article) {
+        if (article.hasEnded()) {
+            return "Finie";
+        }
+        return "En cours";
+    }
+    
 }

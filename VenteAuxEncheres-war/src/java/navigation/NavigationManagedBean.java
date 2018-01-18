@@ -43,7 +43,7 @@ public class NavigationManagedBean {
             this.listMenu.add(new NavigationElement("Connexion", "connexion.xhtml"));
         } else {
             this.listMenu.add(new NavigationElement("Ajouter un article", "newArticle.xhtml"));
-            this.listMenu.add(new NavigationElement("Liste des enchères", "biddings.xhtml"));
+            this.listMenu.add(new NavigationElement("Informations du compte", "accountInfo.xhtml"));
             currentId = Long.parseLong(cookieId.getValue());
             currentLogin = cookieLogin.getValue();
         }

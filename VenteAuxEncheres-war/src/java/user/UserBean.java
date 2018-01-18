@@ -7,6 +7,7 @@ package user;
 
 import cookie.CookieHelper;
 import dao.UserManagerBean;
+import entity.Article;
 import entity.User;
 import java.util.concurrent.TimeUnit;
 import javax.ejb.EJB;
@@ -14,6 +15,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -70,6 +72,10 @@ public class UserBean {
         CookieHelper.removeCookie("authentication_login");
         
         return "index?faces-redirect=true";
+    }
+    
+    public List<Article> getAllArticlesByUser(Long userID) {
+        return userManager.getAllArticlessByUser(userID);
     }
     
     public String getLogin() {
