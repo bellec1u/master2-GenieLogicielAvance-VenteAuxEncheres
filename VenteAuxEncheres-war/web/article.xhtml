@@ -52,8 +52,7 @@
                 <br></br>
                 <!-- /.row -->
 
-                <c:if test="#{not empty navigationManagedBean.currentLogin 
-                              and not articleBean.isArticleOwner(navigationManagedBean.currentId)}">
+                <c:if test="#{not empty navigationManagedBean.currentLogin}">
                     <div class="row">
                         <div class="col-lg-8 mb-4">
                             <h3>Participer aux enchères : </h3>

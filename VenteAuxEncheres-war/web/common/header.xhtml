@@ -14,7 +14,7 @@
         <!-- Navigation -->
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="index.xhtml">Ventes aux enchères</a>
+                <h:link class="navbar-brand" value="Ventes aux enchères" outcome="index" />
                 <button class="navbar-toggler navbar-toggler-right" type="button" action="#{itemManagedBean.initBDD()}" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -24,7 +24,7 @@
                         <ui:repeat var="elem" value="#{navigationManagedBean.listMenu}">
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#{elem.link}">#{elem.displayName}</a>
+                                <h:link class="nav-link" value="#{elem.displayName}" outcome="#{elem.link}" />
                             </li>
 
                         </ui:repeat>
