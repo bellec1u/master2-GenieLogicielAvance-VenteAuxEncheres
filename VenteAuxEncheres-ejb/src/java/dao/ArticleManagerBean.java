@@ -116,4 +116,26 @@ public class ArticleManagerBean extends AbstractManager<Article> {
         edit(article);
     }
 
+    @Override
+    public void removeById(Object articleID) {
+        Article article = getById(articleID);
+        
+        // remove all biddings
+        List<Bidding> biddings = article.getBiddings();
+        article.setBiddings(new ArrayList<>());
+        for (Bidding bidding : biddings) {
+            // remove from user
+            bidding.removeUser();
+            // remove Object
+            getEntityManager().remove(getEntityManager().merge(bidding));
+        }
+        
+        // remove for the user
+        article.getOwner().removeArticle(article.getId());
+        article.setOwner(null);
+        
+        // remove the article
+        getEntityManager().remove(getEntityManager().merge(article));
+    }
+    
 }

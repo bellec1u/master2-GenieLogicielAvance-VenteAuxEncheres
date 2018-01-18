@@ -9,6 +9,7 @@ import dao.ArticleManagerBean;
 import dao.UserManagerBean;
 import entity.Article;
 import entity.Bidding;
+import entity.User;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -42,10 +43,10 @@ public class ArticleBean {
     public ArticleBean() {
     }
     
-    public String remove() {
-        articleManager.removeById(articleId);
+    public String remove(Long articleID) {
+        articleManager.removeById(articleID);
         
-        return "";
+        return "index";
     }
 
     public void findArticle() {

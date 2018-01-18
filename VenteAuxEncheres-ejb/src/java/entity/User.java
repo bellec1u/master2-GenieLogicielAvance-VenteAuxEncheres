@@ -8,6 +8,7 @@ package entity;
 import java.util.List;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -182,6 +183,16 @@ public class User implements Serializable {
         article.setOwner(this);
         articles.add(article);
     }
+    
+    public void removeArticle(Long id) {
+        int x = -1;
+        for (int i = 0; i < articles.size(); i++) {
+            if (Objects.equals(articles.get(i).getId(), id)) {
+                x = i;
+            }
+        }
+        articles.remove(x);
+    }
 
     public List<Bidding> getBiddings() {
         return biddings;
@@ -194,6 +205,16 @@ public class User implements Serializable {
     public void addBidding(Bidding bidding) {
         bidding.setUser(this);
         biddings.add(bidding);
+    }
+
+    void removeBidding(Long id) {
+        int x = -1;
+        for (int i = 0; i < biddings.size(); i++) {
+            if (Objects.equals(biddings.get(i).getId(), id)) {
+                x = i;
+            }
+        }
+        biddings.remove(x);
     }
 
     @Override

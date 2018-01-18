@@ -84,6 +84,11 @@ public class Bidding implements Serializable {
         this.user = user;
     }
 
+    public void removeUser() {
+        user.removeBidding(id);
+        this.user = null;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

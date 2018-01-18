@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
     </h:head>
     <h:body>
@@ -25,6 +24,7 @@
                             <th scope="col">Statut</th>
                             <th scope="col">Enchère la plus haute</th>
                             <th scope="col">Date de fin</th>
+                            <th scope="col">  </th>
                             <th scope="col">  </th>
                         </tr>
                     </thead>
@@ -47,6 +47,11 @@
                                     <h:link class="btn btn-secondary" outcome="updateArticle" value="Modifier" rendered="#{article.hasEnded()}">
                                         <f:param name="articleID" value="#{article.id}" />
                                     </h:link>
+                                </td>
+                                <td>
+                                    <h:form>
+                                        <h:commandButton class="btn btn-danger" value="Supprimer" action="#{articleBean.remove(article.id)}" />
+                                    </h:form>
                                 </td>
                             </tr>
                         </ui:repeat>
