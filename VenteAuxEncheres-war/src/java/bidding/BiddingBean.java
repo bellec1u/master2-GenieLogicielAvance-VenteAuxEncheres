@@ -69,7 +69,7 @@ public class BiddingBean {
     }
 
     public String getBiddingStatus(Bidding bidding) {
-        if ((bidding.getArticle().getEndDate().compareTo(new Date())) < 0) {
+        if (bidding.getArticle().hasEnded()) {
             if (biddingManager.getHighestBiddingValue(bidding.getArticle().getId()) == bidding.getAmount()) {
                 return "Gagnée";
             }

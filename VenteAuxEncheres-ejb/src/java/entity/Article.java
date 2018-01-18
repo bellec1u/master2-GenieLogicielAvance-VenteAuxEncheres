@@ -158,7 +158,7 @@ public class Article implements Serializable {
     }
     
     public boolean hasEnded() {
-        if (endDate.compareTo(new Date()) > 0) {
+        if (endDate.compareTo(new Date()) < 0) {
             return true;
         }
         return false;

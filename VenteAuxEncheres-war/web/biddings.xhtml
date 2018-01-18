@@ -22,7 +22,8 @@
                         <tr>
                             <th scope="col">Article</th>
                             <th scope="col">Statut</th>
-                            <th scope="col">Valeur</th>
+                            <th scope="col">Valeur de l'enchère</th>
+                            <th scope="col">Enchère la plus haute</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,6 +36,7 @@
                                 </td>
                                 <td>#{biddingBean.getBiddingStatus(bidding)}</td>
                                 <td>#{bidding.amount}</td>
+                                <td>#{biddingBean.getHighestBiddingValue(bidding.article.id)}</td>
                             </tr>
                         </ui:repeat>
                     </tbody>
