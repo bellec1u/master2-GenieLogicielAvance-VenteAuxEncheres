@@ -69,7 +69,7 @@ public class UserBean {
         CookieHelper.removeCookie("authentication_id");
         CookieHelper.removeCookie("authentication_login");
         
-        return "index.xhtml";
+        return "index?faces-redirect=true";
     }
     
     public String getLogin() {

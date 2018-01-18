@@ -8,11 +8,12 @@ package article;
 import dao.ArticleManagerBean;
 import dao.UserManagerBean;
 import entity.Article;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedProperty;
 
 /**
@@ -20,8 +21,8 @@ import javax.faces.bean.ManagedProperty;
  * @author Leopold
  */
 @Named(value = "articleBean")
-@RequestScoped
-public class ArticleBean {
+@SessionScoped
+public class ArticleBean implements Serializable {
 
     @EJB
     private ArticleManagerBean articleManager;

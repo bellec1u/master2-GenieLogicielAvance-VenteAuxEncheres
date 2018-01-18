@@ -24,6 +24,7 @@
                             <th scope="col">Statut</th>
                             <th scope="col">Valeur de l'enchère</th>
                             <th scope="col">Enchère la plus haute</th>
+                            <th scope="col">Acheter</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,6 +38,13 @@
                                 <td>#{biddingBean.getBiddingStatus(bidding)}</td>
                                 <td>#{bidding.amount}</td>
                                 <td>#{biddingBean.getHighestBiddingValue(bidding.article.id)}</td>
+                                <td>
+                                    <h:form>
+                                        <h:commandButton value="Acheter" class="btn btn-primary"
+                                                         action="#{purchaseBean.getPurchaseForm(bidding)}" />
+
+                                    </h:form>
+                                </td>
                             </tr>
                         </ui:repeat>
                     </tbody>
