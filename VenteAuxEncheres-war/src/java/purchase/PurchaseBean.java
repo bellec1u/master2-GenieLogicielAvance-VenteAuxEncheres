@@ -5,6 +5,7 @@
  */
 package purchase;
 
+import dao.PurchaseManagerBean;
 import dao.UserManagerBean;
 import entity.Article;
 import entity.Bidding;
@@ -27,6 +28,9 @@ public class PurchaseBean implements Serializable {
     @EJB
     private UserManagerBean userManagerBean;
     
+    @EJB
+    private PurchaseManagerBean purchaseManagerBean;
+    
     private Article article;
     private Bidding bidding;
     private User user;
@@ -48,6 +52,7 @@ public class PurchaseBean implements Serializable {
     
     public String getPurchaseForm(Bidding bidding) {
         this.bidding = bidding;
+        purchase.setAddress(bidding.getUser().getAddress());
         
         return "purchase?faces-redirect=true";
     }
@@ -76,12 +81,17 @@ public class PurchaseBean implements Serializable {
         return user;
     }
     
+    public boolean isArticlePurchased(Long articleId) {
+        System.out.println("purchased" + articleId);
+        return purchaseManagerBean.isArticlePurchased(articleId);
+    }
+    
     public String submitPurchase() {
         purchase.setArticle(bidding.getArticle());
         bidding.getUser().addPurchase(purchase);
         
         userManagerBean.edit(bidding.getUser());
         
-        return "index?faces-redirect=true";
+        return "accountInfo?faces-redirect=true";
     }
 }

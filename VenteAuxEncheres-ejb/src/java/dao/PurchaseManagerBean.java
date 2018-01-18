@@ -9,6 +9,7 @@ import entity.Purchase;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -32,5 +33,14 @@ public class PurchaseManagerBean extends AbstractManager<Purchase> {
     
     public List<Purchase> getAll() {
         return executeNamedQuery("Purchase.findAll");
+    }
+    
+    public boolean isArticlePurchased(Long articleId) {
+        List<Purchase> list = getEntityManager()
+                .createNamedQuery("Purchase.findByArticleId", Purchase.class)
+                .setParameter("articleId", articleId)
+                .getResultList();
+        
+        return !list.isEmpty();
     }
 }

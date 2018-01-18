@@ -24,7 +24,9 @@ import javax.validation.constraints.NotNull;
 @Table(name="Purchases")
 @NamedQueries({
     @NamedQuery(name = "Purchase.findAll", 
-            query = "select p from Purchase p")
+            query = "select p from Purchase p"),
+    @NamedQuery(name = "Purchase.findByArticleId",
+            query = "SELECT p FROM Purchase p WHERE p.article.id = :articleId")
 })
 public class Purchase implements Serializable {
 

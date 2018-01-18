@@ -73,9 +73,9 @@ public class DatabaseSeed {
             Purchase p2 = new Purchase("42 rue des spaghettis, Marseille", "0606123425259999", false, false);
             p2.setArticle(ap2);
             u3.addPurchase(p2);
-            Purchase p3 = new Purchase("69 rue des pistaches, Paris", "1234432156788765", false, true);
-            p3.setArticle(ap3);
-            u2.addPurchase(p3);
+//            Purchase p3 = new Purchase("69 rue des pistaches, Paris", "1234432156788765", false, true);
+//            p3.setArticle(ap3);
+//            u2.addPurchase(p3);
             Purchase p4 = new Purchase("123 rue des tartes aux pom.xml, Bordeaux", "4444123458586660", true, false);
             p4.setArticle(ap4);
             u1.addPurchase(p4);
