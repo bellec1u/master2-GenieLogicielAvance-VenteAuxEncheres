@@ -77,6 +77,12 @@ public class BiddingBean {
         }
         return "En cours";
     }
+    
+    public String remove(Long biddingID) {
+        biddingManager.removeById(biddingID);
+        
+        return "accountInfo?faces-redirect=true";
+    }
 
     public Bidding getBidding() {
         return bidding;

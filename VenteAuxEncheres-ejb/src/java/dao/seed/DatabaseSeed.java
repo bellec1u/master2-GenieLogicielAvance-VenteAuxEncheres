@@ -6,13 +6,11 @@
 package dao.seed;
 
 import entity.Article;
-import static entity.Article_.categories;
 import entity.Bidding;
 import entity.Purchase;
 import entity.User;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -66,6 +64,9 @@ public class DatabaseSeed {
             Bidding b2 = new Bidding(18.5);
             u3.addBidding(b2);
             a1.addBidding(b2);
+            Bidding b3 = new Bidding(25);
+            u2.addBidding(b3);
+            ap1.addBidding(b3);
             
             Purchase p1 = new Purchase("2 rue des cacahuetes, Cherbourg", "3615361536153615", false, false);
             p1.setArticle(ap1);

@@ -12,9 +12,9 @@ import entity.Bidding;
 import entity.Purchase;
 import entity.User;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 
 /**
@@ -82,7 +82,6 @@ public class PurchaseBean implements Serializable {
     }
     
     public boolean isArticlePurchased(Long articleId) {
-        System.out.println("purchased" + articleId);
         return purchaseManagerBean.isArticlePurchased(articleId);
     }
     
@@ -94,4 +93,5 @@ public class PurchaseBean implements Serializable {
         
         return "accountInfo?faces-redirect=true";
     }
+    
 }

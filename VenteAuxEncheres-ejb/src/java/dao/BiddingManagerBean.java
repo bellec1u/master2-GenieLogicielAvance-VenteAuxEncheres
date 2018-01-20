@@ -59,5 +59,21 @@ public class BiddingManagerBean extends AbstractManager<Bidding> {
             return -1;
         }
     }
+    
+    @Override
+    public void removeById(Object biddingID) {
+        Bidding bidding = getById(biddingID);
+        
+        if (bidding.getArticle().hasEnded()) {
+            bidding.getUser().incrementNbAbandonedBiddings();
+        }
+        
+        // remove all links
+        bidding.removeArticle();
+        bidding.removeUser();
+
+        // remove the entity
+        getEntityManager().remove(getEntityManager().merge(bidding));
+    }
 
 }

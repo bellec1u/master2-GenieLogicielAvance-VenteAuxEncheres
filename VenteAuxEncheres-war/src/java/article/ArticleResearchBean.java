@@ -42,16 +42,16 @@ public class ArticleResearchBean {
     public void findArticles() {
         if ("".equals(name) && "".equals(categories)) {
             // research with no parameters
-            articles = articleManager.getAll();
+            articles = articleManager.getAllArticlesUnexpired();
         } else if ("".equals(categories)) {
             // research by name
-            articles = articleManager.findByName(name);
+            articles = articleManager.findByNameUnexpired(name);
         } else if ("".equals(name)) {
             // research by categories
-            articles = articleManager.findByCategories(categories);
+            articles = articleManager.findByCategoriesUnexpired(categories);
         } else {
             // research by name and categories
-            articles = articleManager.findByNameAndCategories(name, categories);
+            articles = articleManager.findByNameAndCategoriesUnexpired(name, categories);
         }
     }
 

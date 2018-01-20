@@ -76,6 +76,11 @@ public class Bidding implements Serializable {
         this.article = article;
     }
 
+    public void removeArticle() {
+        article.removeBidding(id);
+        article = null;
+    }
+
     public User getUser() {
         return user;
     }
@@ -86,7 +91,7 @@ public class Bidding implements Serializable {
 
     public void removeUser() {
         user.removeBidding(id);
-        this.user = null;
+        user = null;
     }
 
     @Override

@@ -10,6 +10,7 @@ import entity.Bidding;
 import entity.Purchase;
 import entity.User;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.Stateless;
@@ -42,26 +43,29 @@ public class ArticleManagerBean extends AbstractManager<Article> {
         return executeNamedQuery("Article.findAll");
     }
 
-    public List<Article> findByName(String name) {
+    public List<Article> findByNameUnexpired(String name) {
         System.out.println("dao.ArticleManagerBean.findByName()");
         return getEntityManager()
-                .createNamedQuery("Article.findByName", Article.class)
+                .createNamedQuery("Article.findByNameUnexpired", Article.class)
+                .setParameter("endDate", new Date())
                 .setParameter("name", "%" + name + "%")
                 .getResultList();
     }
 
-    public List<Article> findByCategories(String categories) {
+    public List<Article> findByCategoriesUnexpired(String categories) {
         System.out.println("dao.ArticleManagerBean.findByCategories()");
         return getEntityManager()
-                .createNamedQuery("Article.findByCategories", Article.class)
+                .createNamedQuery("Article.findByCategoriesUnexpired", Article.class)
+                .setParameter("endDate", new Date())
                 .setParameter("categories", "%" + categories + "%")
                 .getResultList();
     }
 
-    public List<Article> findByNameAndCategories(String name, String categories) {
+    public List<Article> findByNameAndCategoriesUnexpired(String name, String categories) {
         System.out.println("dao.ArticleManagerBean.findByNameAndCategories()");
         return getEntityManager()
-                .createNamedQuery("Article.findByCategories", Article.class)
+                .createNamedQuery("Article.findByNameAndCategoriesUnexpired", Article.class)
+                .setParameter("endDate", new Date())
                 .setParameter("name", "%" + name + "%")
                 .setParameter("categories", "%" + categories + "%")
                 .getResultList();
@@ -151,6 +155,13 @@ public class ArticleManagerBean extends AbstractManager<Article> {
         user.addArticle(article);
         // update the user
         getEntityManager().merge(user);
+    }
+
+    public List<Article> getAllArticlesUnexpired() {
+        return getEntityManager()
+                .createNamedQuery("Article.findAllUnexpired", Article.class)
+                .setParameter("endDate", new Date())
+                .getResultList();
     }
 
 }

@@ -9,6 +9,7 @@ import java.util.List;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,12 +31,14 @@ import javax.validation.constraints.NotNull;
 @NamedQueries({
     @NamedQuery(name = "Article.findAll", 
             query = "select a from Article a"),
-    @NamedQuery(name = "Article.findByName",
-            query = "select a from Article a where upper(a.name) like upper(:name)"),
-    @NamedQuery(name = "Article.findByCategories",
-            query = "select a from Article a where upper(a.categories) like upper(:categories)"),
-    @NamedQuery(name = "Article.findByNameAndCategories",
-            query = "select a from Article a where upper(a.name) like upper(:name) and upper(a.categories) like upper(:categories)"),
+    @NamedQuery(name = "Article.findAllUnexpired", 
+            query = "select a from Article a where a.endDate > :endDate"),
+    @NamedQuery(name = "Article.findByNameUnexpired",
+            query = "select a from Article a where a.endDate > :endDate and upper(a.name) like upper(:name)"),
+    @NamedQuery(name = "Article.findByCategoriesUnexpired",
+            query = "select a from Article a where a.endDate > :endDate and upper(a.categories) like upper(:categories)"),
+    @NamedQuery(name = "Article.findByNameAndCategoriesUnexpired",
+            query = "select a from Article a where a.endDate > :endDate and upper(a.name) like upper(:name) and upper(a.categories) like upper(:categories)"),
     @NamedQuery(name = "Article.findByBonus",
             query = "select a from Article a where a.bonus > 0.0")
 })
@@ -142,6 +145,16 @@ public class Article implements Serializable {
 
     public void setBiddings(List<Bidding> biddings) {
         this.biddings = biddings;
+    }
+    
+    public void removeBidding(Long id) {
+        int x = -1;
+        for (int i = 0; i < biddings.size(); i++) {
+            if (Objects.equals(biddings.get(i).getId(), id)) {
+                x = i;
+            }
+        }
+        biddings.remove(x);
     }
     
     public void addBidding(Bidding bidding) {

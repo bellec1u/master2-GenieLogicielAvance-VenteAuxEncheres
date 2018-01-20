@@ -141,6 +141,10 @@ public class User implements Serializable {
     public void setNbAbandonedBiddings(int nbAbandonedBiddings) {
         this.nbAbandonedBiddings = nbAbandonedBiddings;
     }
+    
+    public void incrementNbAbandonedBiddings() {
+        nbAbandonedBiddings++;
+    }
 
     public double getWallet() {
         return wallet;

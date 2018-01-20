@@ -44,7 +44,7 @@ public class ArticleBean implements Serializable {
     public String remove(Long articleID) {
         articleManager.removeById(articleID);
         
-        return "index";
+        return "accountInfo?faces-redirect=true";
     }
 
     public void findArticle() {
@@ -53,6 +53,10 @@ public class ArticleBean implements Serializable {
     
     public List<Article> getAllArticles() {
         return articleManager.getAll();
+    }
+    
+    public List<Article> getAllArticlesUnexpired() {
+        return articleManager.getAllArticlesUnexpired();
     }
 
     public Long getArticleId() {
