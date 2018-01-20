@@ -26,17 +26,17 @@ public class ArticleEditBean {
 
     @EJB
     private ArticleManagerBean articleManager;
-    
+
     @EJB
     private UserManagerBean userManager;
 
     private NavigationManagedBean navigationBean;
-    
+
     @ManagedProperty(value = "#{param.articleID}")
     private Long articleID;
-    
+
     private Article article;
-        
+
     /**
      * Creates a new instance of ArticleEditBean
      */
@@ -53,24 +53,26 @@ public class ArticleEditBean {
     public void setArticle(Article article) {
         this.article = article;
     }
-    
-    public void create() {
-        articleManager.create(article);
-        User user = userManager.getById(navigationBean.getCurrentId());
-        user.addArticle(article);
-        userManager.edit(user);
+
+    public String create() {
+        articleManager.addArticleToUser(article, navigationBean.getCurrentId());
+        return "index?faces-redirect=true";
     }
-    
+
     public void findArticle() {
         article = articleManager.getById(articleID);
-        System.out.println("##### " + article.getId());
     }
-    
+
     public String edit() {
-        article.setId(articleID);
-        articleManager.edit(article);
-        
-        return "index";
+        Article a = articleManager.getById(articleID);
+        a.setName(article.getName());
+        a.setDescription(article.getDescription());
+        a.setStartingPrice(article.getStartingPrice());
+        a.setCategories(article.getCategories());
+        a.setEndDate(article.getEndDate());
+        articleManager.edit(a);
+
+        return "index?faces-redirect=true";
     }
 
     public Long getArticleID() {
@@ -80,5 +82,5 @@ public class ArticleEditBean {
     public void setArticleID(Long articleID) {
         this.articleID = articleID;
     }
-    
+
 }

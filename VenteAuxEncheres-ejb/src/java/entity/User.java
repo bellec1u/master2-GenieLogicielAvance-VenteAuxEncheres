@@ -55,7 +55,7 @@ public class User implements Serializable {
     @NotNull
     private double wallet;
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Purchase> purchases;
     
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
@@ -159,7 +159,18 @@ public class User implements Serializable {
     }
     
     public void addPurchase(Purchase purchase) {
+        purchase.setUser(this);
         purchases.add(purchase);
+    }
+
+    void removePurchase(Long id) {
+        int x = -1;
+        for (int i = 0; i < purchases.size(); i++) {
+            if (Objects.equals(purchases.get(i).getId(), id)) {
+                x = i;
+            }
+        }
+        purchases.remove(x);
     }
 
     public List<Article> getArticles() {

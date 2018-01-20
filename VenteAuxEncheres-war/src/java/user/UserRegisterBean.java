@@ -48,7 +48,7 @@ public class UserRegisterBean {
             CookieHelper.setCookie("authentication_id", user.getId() + "", (int) TimeUnit.MINUTES.toSeconds(15));
             CookieHelper.setCookie("authentication_login", user.getLogin() + "", (int) TimeUnit.MINUTES.toSeconds(15));
         }
-        return "index";
+        return "index?faces-redirect=true";
     }
 
     private boolean formCheck() {

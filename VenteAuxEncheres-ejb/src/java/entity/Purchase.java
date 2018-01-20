@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -45,6 +46,9 @@ public class Purchase implements Serializable {
     
     @OneToOne
     private Article article;
+    
+    @ManyToOne
+    private User user;
     
     public Purchase() {
         
@@ -103,6 +107,23 @@ public class Purchase implements Serializable {
 
     public void setArticle(Article article) {
         this.article = article;
+    }
+
+    public void removeArticle() {
+        article = null;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void removeUser() {
+        user.removePurchase(id);
+        this.user = null;
     }
 
     @Override
