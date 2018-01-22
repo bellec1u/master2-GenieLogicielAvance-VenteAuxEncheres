@@ -162,9 +162,14 @@ public class User implements Serializable {
         this.purchases = purchases;
     }
     
-    public void addPurchase(Purchase purchase) {
+    public void addPurchase(Purchase purchase,double price) {
         purchase.setUser(this);
         purchases.add(purchase);
+        //decrementation de l'achat
+        if(this.wallet - price  < 0)
+            this.wallet = 0;
+        //incrementation du porte-feuille
+        this.wallet += purchase.getArticle().getBonus();
     }
 
     void removePurchase(Long id) {

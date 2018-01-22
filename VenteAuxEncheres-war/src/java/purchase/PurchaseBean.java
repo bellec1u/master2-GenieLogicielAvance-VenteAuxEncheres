@@ -5,6 +5,7 @@
  */
 package purchase;
 
+import dao.BiddingManagerBean;
 import dao.PurchaseManagerBean;
 import dao.UserManagerBean;
 import entity.Article;
@@ -30,6 +31,9 @@ public class PurchaseBean implements Serializable {
     
     @EJB
     private PurchaseManagerBean purchaseManagerBean;
+    
+    @EJB
+    private BiddingManagerBean biddingManagerBean;
     
     private Article article;
     private Bidding bidding;
@@ -87,8 +91,8 @@ public class PurchaseBean implements Serializable {
     
     public String submitPurchase() {
         purchase.setArticle(bidding.getArticle());
-        bidding.getUser().addPurchase(purchase);
-        
+        double price = biddingManagerBean.getHighestBiddingValue(bidding.getArticle().getId());
+        bidding.getUser().addPurchase(purchase,price);  
         userManagerBean.edit(bidding.getUser());
         
         return "accountInfo?faces-redirect=true";
