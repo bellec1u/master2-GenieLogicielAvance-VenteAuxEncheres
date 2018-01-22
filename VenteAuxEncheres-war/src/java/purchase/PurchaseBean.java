@@ -87,9 +87,14 @@ public class PurchaseBean implements Serializable {
     
     public String submitPurchase() {
         purchase.setArticle(bidding.getArticle());
-        bidding.getUser().addPurchase(purchase);
+        User user = bidding.getUser();
+        System.out.println("user : " + user.toString());
+        purchase.setUser(user);
         
-        userManagerBean.edit(bidding.getUser());
+        purchase = purchaseManagerBean.create(purchase);
+        //userManagerBean.edit(bidding.getUser());
+        
+        purchaseManagerBean.verifyPurchase(purchase);
         
         return "accountInfo?faces-redirect=true";
     }

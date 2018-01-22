@@ -7,7 +7,17 @@ package dao;
 
 import entity.Purchase;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.jms.JMSConnectionFactory;
+import javax.jms.JMSContext;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.ObjectMessage;
+import javax.jms.Queue;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -18,6 +28,13 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class PurchaseManagerBean extends AbstractManager<Purchase> {
+
+    @Resource(mappedName = "jms/VenteAuxEncheresQueue")
+    private Queue venteAuxEncheresQueue;
+
+    @Inject
+    @JMSConnectionFactory("jms/VenteAuxEncheresQueueFactory")
+    private JMSContext context;
 
     @PersistenceContext(unitName = "VenteAuxEncheres-ejbPU")
     private EntityManager em;
@@ -42,5 +59,24 @@ public class PurchaseManagerBean extends AbstractManager<Purchase> {
                 .getResultList();
         
         return !list.isEmpty();
+    }
+    
+    public void verifyPurchase(Purchase purchase) {
+        sendJMSMessageToVenteAuxEncheresQueue(purchase);
+    }
+    
+    private Message createPurchaseMessage(Purchase purchase) throws JMSException {
+        ObjectMessage om = context.createObjectMessage();
+        om.setObject(purchase);
+        return om;
+    }
+
+    private void sendJMSMessageToVenteAuxEncheresQueue(Purchase purchase) {
+        try {
+            context.createProducer().send(venteAuxEncheresQueue, createPurchaseMessage(purchase));
+            System.out.println("Purchase for article \"" + purchase.getArticle().getName() + "\" sent to be verified !");
+        } catch (JMSException ex) {
+            Logger.getLogger(PurchaseManagerBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

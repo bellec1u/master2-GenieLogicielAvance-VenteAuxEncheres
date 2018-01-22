@@ -35,9 +35,13 @@ public class DatabaseSeed {
     public void seed() {
         try {
             User u1 = new User("u1", "password", "user", "one", "address");
+            u1.setWallet(0.5);
             User u2 = new User("u2", "password", "user", "two", "address");
+            u2.setWallet(15.0);
             User u3 = new User("u3", "password", "user", "three", "address");
+            u3.setWallet(1.0);
             User u4 = new User("u4", "password", "user", "four", "address");
+            u4.setWallet(70.0);
             
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
             

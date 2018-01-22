@@ -28,7 +28,7 @@ public class BiddingManagerBean extends AbstractManager<Bidding> {
     public BiddingManagerBean() {
         super(Bidding.class);
     }
-
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;

@@ -10,4 +10,10 @@
   <module>
     <ejb>VenteAuxEncheres-ejb.jar</ejb>
   </module>
+  <module>
+    <web>
+      <web-uri>VenteAuxEncheres-Validation-war.war</web-uri>
+      <context-root>/VenteAuxEncheres-Validation-war</context-root>
+    </web>
+  </module>
 </application>
