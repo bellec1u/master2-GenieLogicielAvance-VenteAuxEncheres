@@ -73,6 +73,14 @@ public class PurchaseBean implements Serializable {
         return bidding;
     }
     
+    public double getPrice(){
+        return getBidding().getAmount();
+    }
+    
+    public double getFinalPrice(double bonus){
+        return getPrice() - bonus;
+    }
+    
     public Purchase getPurchase() {
         return purchase;
     }

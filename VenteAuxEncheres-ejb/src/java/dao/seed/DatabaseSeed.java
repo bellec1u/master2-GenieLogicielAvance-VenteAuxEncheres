@@ -38,7 +38,6 @@ public class DatabaseSeed {
             User u2 = new User("u2", "password", "user", "two", "address");
             User u3 = new User("u3", "password", "user", "three", "address");
             User u4 = new User("u4", "password", "user", "four", "address");
-            
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
             
             Article a1 = new Article("Pikachu", "this is a Pikachu !", 10, simpleDateFormat.parse("28/06/2018"), "pokemon/jaune/electique");
@@ -80,12 +79,15 @@ public class DatabaseSeed {
             Purchase p2 = new Purchase("42 rue des spaghettis, Marseille", "0606123425259999", false, false);
             p2.setArticle(ap2);
             u3.addPurchase(p2,100);
+            
 //            Purchase p3 = new Purchase("69 rue des pistaches, Paris", "1234432156788765", false, true);
 //            p3.setArticle(ap3);
 //            u2.addPurchase(p3);
+            
             Purchase p4 = new Purchase("123 rue des tartes aux pom.xml, Bordeaux", "4444123458586660", true, false);
             p4.setArticle(ap4);
             u1.addPurchase(p4,1000);
+            u2.setWallet(10.00);
             
             em.persist(u1);
             em.persist(u2);
