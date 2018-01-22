@@ -54,6 +54,11 @@ public class UserManagerBean extends AbstractManager<User> {
         }
         return new ArrayList<>();
     }
+    
+    public double getWallet(Long userID) {
+        User user= getById(userID);
+        return user.getWallet();
+    }
 
     public User getByCredentials(String login, String password) {
         User result = getEntityManager()

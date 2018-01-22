@@ -17,7 +17,9 @@
             <ui:define name="content">
                 
                 <h2>Faire une commande de #{purchaseBean.bidding.article.name}</h2>
-                
+                <p>Wallet : #{userBean.getWallet(navigationManagedBean.currentId)}</p>
+                <p>Price : #{purchaseBean.getPrice()}</p>
+                <p>Final Price : #{purchaseBean.getFinalPrice(userBean.getWallet(navigationManagedBean.currentId))}</p>
                 <h:form>
                     <h:outputLabel for="name">Adresse :</h:outputLabel>
                     <h:inputText id="name" class="form-control" value="#{purchaseBean.purchase.address}" />

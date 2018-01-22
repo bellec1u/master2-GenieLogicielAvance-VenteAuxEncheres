@@ -165,6 +165,8 @@ public class User implements Serializable {
     public void addPurchase(Purchase purchase) {
         purchase.setUser(this);
         purchases.add(purchase);
+        //incrementation du porte-feuille
+        this.wallet += purchase.getArticle().getBonus();
     }
 
     void removePurchase(Long id) {

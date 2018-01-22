@@ -81,6 +81,10 @@ public class UserBean {
     public String getLogin() {
         return login;
     }
+    
+    public double getWallet(Long id) {
+        return userManager.getWallet(id);
+    }
 
     public void setLogin(String login) {
         this.login = login;

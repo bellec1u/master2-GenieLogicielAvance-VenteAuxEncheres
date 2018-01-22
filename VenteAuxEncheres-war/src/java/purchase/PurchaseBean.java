@@ -5,6 +5,7 @@
  */
 package purchase;
 
+import dao.BiddingManagerBean;
 import dao.PurchaseManagerBean;
 import dao.UserManagerBean;
 import entity.Article;
@@ -30,6 +31,9 @@ public class PurchaseBean implements Serializable {
     
     @EJB
     private PurchaseManagerBean purchaseManagerBean;
+    
+    @EJB
+    private BiddingManagerBean biddingManagerBean;
     
     private Article article;
     private Bidding bidding;
@@ -69,6 +73,14 @@ public class PurchaseBean implements Serializable {
         return bidding;
     }
     
+    public double getPrice(){
+        return getBidding().getAmount();
+    }
+    
+    public double getFinalPrice(double bonus){
+        return getPrice() - bonus;
+    }
+    
     public Purchase getPurchase() {
         return purchase;
     }
@@ -87,12 +99,8 @@ public class PurchaseBean implements Serializable {
     
     public String submitPurchase() {
         purchase.setArticle(bidding.getArticle());
-        User user = bidding.getUser();
-        System.out.println("user : " + user.toString());
-        purchase.setUser(user);
-        
+        bidding.getUser().addPurchase(purchase);  
         purchase = purchaseManagerBean.create(purchase);
-        //userManagerBean.edit(bidding.getUser());
         
         purchaseManagerBean.verifyPurchase(purchase);
         

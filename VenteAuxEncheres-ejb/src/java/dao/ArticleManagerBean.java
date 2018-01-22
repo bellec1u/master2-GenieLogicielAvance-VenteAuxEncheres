@@ -102,7 +102,7 @@ public class ArticleManagerBean extends AbstractManager<Article> {
 
         //merge
         for (Article bonus : listBonus) {
-            bonus.setBonus(random.nextDouble());
+            bonus.setBonus(10.0);
             edit(bonus);
         }
     }

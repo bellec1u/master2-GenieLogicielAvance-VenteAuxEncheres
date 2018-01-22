@@ -71,19 +71,12 @@ public class DatabaseSeed {
             Bidding b3 = new Bidding(25);
             u2.addBidding(b3);
             ap1.addBidding(b3);
-            
-            Purchase p1 = new Purchase("2 rue des cacahuetes, Cherbourg", "3615361536153615", false, false);
-            p1.setArticle(ap1);
-            u4.addPurchase(p1);
-            Purchase p2 = new Purchase("42 rue des spaghettis, Marseille", "0606123425259999", false, false);
-            p2.setArticle(ap2);
-            u3.addPurchase(p2);
-//            Purchase p3 = new Purchase("69 rue des pistaches, Paris", "1234432156788765", false, true);
-//            p3.setArticle(ap3);
-//            u2.addPurchase(p3);
-            Purchase p4 = new Purchase("123 rue des tartes aux pom.xml, Bordeaux", "4444123458586660", true, false);
-            p4.setArticle(ap4);
-            u1.addPurchase(p4);
+            Bidding b4 = new Bidding(100);
+            u3.addBidding(b4);
+            ap2.addBidding(b4);
+            Bidding b5 = new Bidding(1000);
+            u1.addBidding(b5);
+            ap4.addBidding(b5);
             
             em.persist(u1);
             em.persist(u2);
