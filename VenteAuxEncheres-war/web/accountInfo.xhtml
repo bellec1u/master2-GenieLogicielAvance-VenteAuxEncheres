@@ -71,7 +71,6 @@
                             <th scope="col">Enchère la plus haute</th>
                             <th scope="col">  </th>
                             <th scope="col">  </th>
-                            <th scope="col">  </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,12 +88,6 @@
                                     <h:form rendered="#{'Gagnée' == biddingBean.getBiddingStatus(bidding)
                                                         and not purchaseBean.isArticlePurchased(bidding.article.id)}">
                                         <h:commandButton value="Commander" class="btn btn-primary"
-                                                         action="#{purchaseBean.getPurchaseForm(bidding)}" />
-                                    </h:form>
-                                </td>
-                                <td>
-                                    <h:form rendered="#{not purchaseBean.isArticlePurchased(bidding.article.id)}">
-                                        <h:commandButton value="Acheter" class="btn btn-primary"
                                                          action="#{purchaseBean.getPurchaseForm(bidding)}" />
                                     </h:form>
                                 </td>
