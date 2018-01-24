@@ -5,10 +5,7 @@
  */
 package dao;
 
-import entity.Article;
 import entity.Bidding;
-import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;

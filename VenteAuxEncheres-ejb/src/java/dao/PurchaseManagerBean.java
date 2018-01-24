@@ -19,7 +19,6 @@ import javax.jms.Message;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -79,4 +78,5 @@ public class PurchaseManagerBean extends AbstractManager<Purchase> {
             Logger.getLogger(PurchaseManagerBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 }

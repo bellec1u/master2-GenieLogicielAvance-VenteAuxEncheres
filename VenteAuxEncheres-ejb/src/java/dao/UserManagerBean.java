@@ -7,6 +7,7 @@ package dao;
 
 import entity.Article;
 import entity.Bidding;
+import entity.Purchase;
 import entity.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,14 @@ public class UserManagerBean extends AbstractManager<User> {
         User user = getById(userID);
         if (user != null) {
             return user.getArticles();
+        }
+        return new ArrayList<>();
+    }
+    
+    public List<Purchase> getAllPurchasesByUser(Long userID) {
+        User user = getById(userID);
+        if (user != null) {
+            return user.getPurchases();
         }
         return new ArrayList<>();
     }

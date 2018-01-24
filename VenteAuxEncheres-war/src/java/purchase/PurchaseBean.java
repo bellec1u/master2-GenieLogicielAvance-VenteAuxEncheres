@@ -13,6 +13,7 @@ import entity.Bidding;
 import entity.Purchase;
 import entity.User;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -54,6 +55,7 @@ public class PurchaseBean implements Serializable {
     }
     
     public String getPurchaseForm(Bidding bidding) {
+        this.purchase = new Purchase();
         this.bidding = bidding;
         purchase.setAddress(bidding.getUser().getAddress());
         
@@ -104,6 +106,10 @@ public class PurchaseBean implements Serializable {
         purchaseManagerBean.verifyPurchase(purchase);
         
         return "accountInfo?faces-redirect=true";
+    }
+    
+    public List<Purchase> getPurchasesForUserId(Long userID) {
+        return userManagerBean.getAllPurchasesByUser(userID);
     }
     
 }

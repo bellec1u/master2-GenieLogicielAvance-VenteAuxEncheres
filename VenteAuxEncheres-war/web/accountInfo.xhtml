@@ -101,6 +101,43 @@
                         </ui:repeat>
                     </tbody>
                 </table>
+                
+                <h2>Liste des commandes :</h2>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Article</th>
+                            <th scope="col">Adresse</th>
+                            <th scope="col">Compte banquaire</th>
+                            <th scope="col">Payé</th>
+                            <th scope="col">Envoyé</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ui:repeat var="purchase" value="#{purchaseBean.getPurchasesForUserId(navigationManagedBean.currentId)}">
+                            <tr>
+                                <td>
+                                    <h:link outcome="article" value="#{purchase.article.name}">
+                                        <f:param name="articleID" value="#{purchase.article.id}" />
+                                    </h:link>
+                                </td>
+                                <td>
+                                    #{purchase.address}
+                                </td>
+                                <td>
+                                    #{purchase.bankAccountNumber}
+                                </td>
+                                <td>
+                                    #{purchase.isPayed}
+                                </td>
+                                <td>
+                                    #{purchase.isShipped}
+                                </td>
+                            </tr>
+                        </ui:repeat>
+                    </tbody>
+                </table>
             </ui:define>
 
         </ui:composition>
