@@ -22,9 +22,16 @@
             </ui:define>
 
             <ui:define name="content">
-                <h1 class="mt-4 mb-3">Article : 
-                    <small>#{articleBean.article.name}</small>
-                </h1>
+                <c:if test="#{articleBean.article.bonus>0}">
+                    <h1 class="mt-4 mb-3">Article : 
+                        <small>#{articleBean.article.name} en promotion !</small>
+                    </h1>
+                </c:if>
+                <c:if test="#{articleBean.article.bonus==0}">
+                    <h1 class="mt-4 mb-3">Article : 
+                        <small>#{articleBean.article.name}</small>
+                    </h1>
+                </c:if>
 
                 <!-- Portfolio Item Row -->
                 <div class="row">

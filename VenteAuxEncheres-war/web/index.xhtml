@@ -28,9 +28,15 @@
                                     <img class="card-img-top" src="http://placehold.it/700x400" alt=""></img>
                                     <div class="card-body">
                                         <h4 class="card-title">
-                                            <h:link outcome="article" value="#{elem.name}">
+
+                                            <h:link outcome="article" value="#{elem.name} en promotion !" rendered="#{elem.bonus > 0}">
                                                 <f:param name="articleID" value="#{elem.id}" />
                                             </h:link>
+
+                                            <h:link outcome="article" value="#{elem.name}" rendered="#{elem.bonus == 0}">
+                                                <f:param name="articleID" value="#{elem.id}" />
+                                            </h:link>
+
                                         </h4>
                                         <p class="card-text">#{elem.description}</p>
                                     </div>
