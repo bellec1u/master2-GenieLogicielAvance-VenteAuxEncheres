@@ -75,10 +75,11 @@ public class ArticleManagerBean extends AbstractManager<Article> {
         System.out.println("dao.ArticleManagerBean.findByBonus()");
         return getEntityManager()
                 .createNamedQuery("Article.findByBonus", Article.class)
+                .setParameter("endDate", new Date())
                 .getResultList();
     }
 
-    @Schedule(second = "0", minute = "*", hour = "*", dayOfMonth = "*", month = "*", year = "*")
+    @Schedule(second = "0", minute = "0", hour = "0", dayOfMonth = "*", month = "*", year = "*")
     public void newBonus() {
         Random random = new Random();
 

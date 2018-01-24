@@ -40,7 +40,7 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "Article.findByNameAndCategoriesUnexpired",
             query = "select a from Article a where a.endDate > :endDate and upper(a.name) like upper(:name) and upper(a.categories) like upper(:categories)"),
     @NamedQuery(name = "Article.findByBonus",
-            query = "select a from Article a where a.bonus > 0.0")
+            query = "select a from Article a where a.bonus>0.0 and a.endDate > :endDate")
 })
 public class Article implements Serializable {
 
