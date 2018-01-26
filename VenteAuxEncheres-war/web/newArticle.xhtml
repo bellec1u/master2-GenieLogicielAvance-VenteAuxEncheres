@@ -20,36 +20,45 @@
                 <c:choose>
                     <c:when test="#{not empty navigationManagedBean.currentLogin}">
 
-                        <h:form>
-                            <fieldset>
-                                <legend>Nouvel article </legend>
+                        <c:choose>
+                            <c:when test="#{userBean.canAddArticle(navigationManagedBean.currentId)}"> 
 
-                                <h:outputLabel for="name">Nom </h:outputLabel>
-                                <h:inputText id="name" class="form-control" value="#{articleEditBean.article.name}" />
-                                <br/>
+                                <h:form>
+                                    <fieldset>
+                                        <legend>Nouvel article </legend>
 
-                                <h:outputLabel for="description">Description </h:outputLabel>
-                                <h:inputTextarea id="description" class="form-control" value="#{articleEditBean.article.description}" />
-                                <br/>
+                                        <h:outputLabel for="name">Nom </h:outputLabel>
+                                        <h:inputText id="name" class="form-control" value="#{articleEditBean.article.name}" />
+                                        <br/>
 
-                                <h:outputLabel for="startingPrice">Prix de départ </h:outputLabel>
-                                <h:inputText id="startingPrice" class="form-control" value="#{articleEditBean.article.startingPrice}" />
-                                <br/>
+                                        <h:outputLabel for="description">Description </h:outputLabel>
+                                        <h:inputTextarea id="description" class="form-control" value="#{articleEditBean.article.description}" />
+                                        <br/>
 
-                                <h:outputLabel for="categories">Catégories </h:outputLabel>
-                                <h:inputTextarea id="categories" class="form-control" value="#{articleEditBean.article.categories}" />
-                                <br/>
+                                        <h:outputLabel for="startingPrice">Prix de départ </h:outputLabel>
+                                        <h:inputText id="startingPrice" class="form-control" value="#{articleEditBean.article.startingPrice}" />
+                                        <br/>
 
-                                <h:outputLabel for="endDate">Fin des enchères </h:outputLabel>
-                                <h:inputText p:type="date" id="endDate" class="form-control" value="#{articleEditBean.article.endDate}" >  
-                                    <f:convertDateTime pattern="yyyy-MM-dd"/>
-                                </h:inputText>
-                                <br/>
+                                        <h:outputLabel for="categories">Catégories </h:outputLabel>
+                                        <h:inputTextarea id="categories" class="form-control" value="#{articleEditBean.article.categories}" />
+                                        <br/>
 
-                                <h:commandButton value="Valider" class="btn btn-primary" action="#{articleEditBean.create()}" />
-                            </fieldset>
-                        </h:form>
+                                        <h:outputLabel for="endDate">Fin des enchères </h:outputLabel>
+                                        <h:inputText p:type="date" id="endDate" class="form-control" value="#{articleEditBean.article.endDate}" >  
+                                            <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                        </h:inputText>
+                                        <br/>
 
+                                        <h:commandButton value="Valider" class="btn btn-primary" action="#{articleEditBean.create()}" />
+                                    </fieldset>
+                                </h:form>
+
+                            </c:when>
+                            <c:otherwise>
+                                Vous ne pouvez plus liciter !
+                            </c:otherwise>
+                        </c:choose>
+                        
                     </c:when>
                     <c:otherwise>
                         Veuillez-vous connecter !

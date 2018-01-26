@@ -97,4 +97,9 @@ public class UserBean {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public boolean canAddArticle(Long userID) {
+        System.out.println("coucou");
+        return userManager.canAddArticle(userID);
+    }
 }

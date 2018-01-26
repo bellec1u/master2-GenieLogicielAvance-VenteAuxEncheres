@@ -40,6 +40,9 @@ public class DatabaseSeed {
             u2.setWallet(15.0);
             User u3 = new User("u3", "password", "user", "three", "address");
             u3.setWallet(1.0);
+            u3.incrementNbAbandonedBiddings();
+            u3.incrementNbAbandonedBiddings();
+            u3.incrementNbAbandonedBiddings();
             User u4 = new User("u4", "password", "user", "four", "address");
             u4.setWallet(70.0);
             
