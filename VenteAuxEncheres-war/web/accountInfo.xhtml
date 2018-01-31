@@ -92,7 +92,7 @@
                                     </h:form>
                                 </td>
                                 <td>
-                                    <h:form>
+                                    <h:form rendered="#{not purchaseBean.isArticlePurchased(bidding.article.id)}">
                                         <h:commandButton class="btn btn-danger" value="Se retirer" 
                                                          action="#{biddingBean.remove(bidding.id)}" />
                                     </h:form>
