@@ -99,7 +99,6 @@ public class UserBean {
     }
     
     public boolean canAddArticle(Long userID) {
-        System.out.println("coucou");
         return userManager.canAddArticle(userID);
     }
 }

@@ -82,7 +82,6 @@ public class UserManagerBean extends AbstractManager<User> {
     }
 
     public boolean canAddArticle(Long userID) {
-        System.out.println("----- " + (getById(userID).getNbAbandonedBiddings() < 3));
         return getById(userID).getNbAbandonedBiddings() < 3;
     }
 
